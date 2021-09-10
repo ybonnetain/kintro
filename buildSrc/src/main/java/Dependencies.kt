@@ -6,6 +6,7 @@ object Versions {
     const val kotlinxSerialization = "1.2.2"
     const val compose = "1.0.2"
     const val accompanist = "0.17.0"
+    const val lifecycle = "2.2.0"
 }
 
 object Deps {
@@ -26,8 +27,12 @@ object Deps {
 
     object Koin {
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
-        val android = "io.insert-koin:koin-android:${Versions.koin}"
+        const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    }
+
+    object Androidx {
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     }
 
 }

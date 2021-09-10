@@ -5,4 +5,6 @@ import org.koin.core.component.inject
 
 class Repository() : KoinComponent {
     private val api : Remote by inject()
+
+    suspend fun getStuff() = api.fetchStuff()
 }

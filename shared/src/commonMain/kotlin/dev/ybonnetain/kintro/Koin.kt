@@ -52,9 +52,11 @@ fun createHttpClient(json: Json) = HttpClient {
         connectTimeoutMillis = 60_000
         socketTimeoutMillis = 60_000
     }
+
     install(JsonFeature) {
         serializer = KotlinxSerializer(json)
     }
+
     install(DefaultRequest) {
         headers {
             append("x-client-src", "kintro")
