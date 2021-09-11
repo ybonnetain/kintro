@@ -1,14 +1,20 @@
 import SwiftUI
 import Shared
 
-class TodoViewModel : ObservableObject {
+class AppViewModel : ObservableObject {
     @Published var todos = [Todo]()
     @Published var todo : Todo?
+    @Published var count: Int
     
-    private let repository : Repository
+    public let repository : Repository
     
     init(repository: Repository) {
         self.repository = repository
+        self.count = Int(self.repository.incrementCounter())
+    }
+    
+    func increment() {
+        self.count = Int(self.repository.incrementCounter())
     }
     
     func getTodo(id: Int) {
@@ -29,7 +35,7 @@ class TodoViewModel : ObservableObject {
 }
 
 struct ContentView: View {
-    @StateObject var viewModel = TodoViewModel(repository: Repository())
+    @StateObject var viewModel = AppViewModel(repository: Repository())
     
 	var body: some View {
         ZStack {
@@ -38,7 +44,7 @@ struct ContentView: View {
                 HeaderView()
                 
                 HStack(spacing: 16) {
-                    CounterView(count: 0)
+                    CounterView()
                     AddView()
                 }
                 .padding(.horizontal)
@@ -76,13 +82,16 @@ struct HeaderView: View {
 }
 
 struct CounterView: View {
-    let count : Int
+    @EnvironmentObject var viewModel: AppViewModel
+    
     var body: some View {
         VStack {
             Text("Count")
                 .modifier(Title())
                 .colorInvert()
-            Text(String(self.count))
+            Text(String(viewModel.count))
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
                 .modifier(Number())
                 .colorInvert()
             Text("todo(s)")
@@ -94,16 +103,19 @@ struct CounterView: View {
 }
 
 struct AddView: View {
-    @EnvironmentObject var viewModel: TodoViewModel
+    @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        Button(action: { viewModel.getTodo(id: 1)}) {
+        Button(action: {
+            viewModel.increment()
+            viewModel.getTodo(id: viewModel.count)
+        }) {
             VStack {
-                Text("Add")
+                Text("Next")
                     .modifier(Title())
-                Text("1")
+                Image(systemName: "goforward.plus")
                     .modifier(Number())
-                Text("todo")
+                Text("Fibonacci")
                     .modifier(Excerpt())
             }
             .modifier(AdderTile())
@@ -112,7 +124,7 @@ struct AddView: View {
 }
 
 struct TodoView: View {
-    @EnvironmentObject var viewModel: TodoViewModel
+    @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
         if let todo = viewModel.todo {
@@ -120,12 +132,11 @@ struct TodoView: View {
                 Image(systemName: "clock")
                     .font(.system(size: 40))
                     .foregroundColor(Color.orange)
-                    .padding(.top, 16)
                 Text(todo.title)
                     .font(.system(.largeTitle, design: .rounded))
                     .fontWeight(.black)
-                    .padding(.bottom, 16)
             }
+            .padding()
             .modifier(TodoTile())
             .contextMenu {
                 Button {
