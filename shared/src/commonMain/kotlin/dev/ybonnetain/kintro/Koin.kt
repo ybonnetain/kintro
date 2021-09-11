@@ -20,11 +20,11 @@ fun initKoin() = initKoin() {}
 
 // Koin init
 // in android runtime
-// because app module declaration ..
+// because app module declaration, platformModule is a platform specific container (expect.kt)
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
-    modules(shared())
+    modules(shared(), platformModule())
 }
 
 // modules map
@@ -62,8 +62,8 @@ fun createHttpClient(json: Json) = HttpClient {
             append("x-client-src", "kintro")
         }
         url {
-            protocol = URLProtocol.HTTPS
-            host = "test.api.com"
+            protocol = if (Configuration.scheme == "http") URLProtocol.HTTP else URLProtocol.HTTPS
+            host = Configuration.host
         }
     }
 }

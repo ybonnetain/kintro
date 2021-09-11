@@ -1,8 +1,10 @@
+// https://kotlinlang.org/docs/mpp-dsl-reference.html
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    id("kotlinx-serialization")
     id("com.android.library")
 }
 
@@ -13,7 +15,7 @@ kotlin {
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64 // available to KT 1.5.30
         else -> ::iosX64
     }
 
@@ -30,7 +32,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                with(Deps.Kotlin) {
+                with(Deps.Kotlinx) {
                     implementation(coroutinesCore)
                     implementation(serializationCore)
                 }

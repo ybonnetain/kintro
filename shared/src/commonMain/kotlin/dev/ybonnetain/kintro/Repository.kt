@@ -6,5 +6,9 @@ import org.koin.core.component.inject
 class Repository() : KoinComponent {
     private val api : Remote by inject()
 
-    suspend fun getStuff() = api.fetchStuff()
+    @Throws(Exception::class)
+    suspend fun getTodos() = api.fetchTodos()
+
+    @Throws(Exception::class)
+    suspend fun getTodo(id: Int) = api.fetchTodo(id)
 }

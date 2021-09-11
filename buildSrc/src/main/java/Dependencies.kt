@@ -10,10 +10,17 @@ object Versions {
 }
 
 object Deps {
-    object Kotlin {
-        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    object Gradle {
+        const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30" // TODO use Versions when all aligned to 1.5.30
+        const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+    }
+
+    object Androidx {
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    }
+
+    object Kotlinx {
         const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
         const val serializationCore = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
     }
 
@@ -30,9 +37,4 @@ object Deps {
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
     }
-
-    object Androidx {
-        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-    }
-
 }
