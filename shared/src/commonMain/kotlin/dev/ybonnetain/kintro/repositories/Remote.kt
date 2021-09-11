@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro
+package dev.ybonnetain.kintro.repositories
 
 import dev.ybonnetain.kintro.models.Todo
 import io.ktor.client.*
@@ -7,7 +7,7 @@ import org.koin.core.component.KoinComponent
 
 internal class Remote(private val client: HttpClient) : KoinComponent {
     suspend fun fetchTodos() = client.get<List<Todo>>(TODOS_PATH)
-    suspend fun fetchTodo(id: Int) = client.get<Todo>("${TODOS_PATH}/${id}")
+    suspend fun fetchTodo(id: Int) = client.get<Todo>("$TODOS_PATH/${id}")
 
     companion object {
         const val TODOS_PATH = "/todos"

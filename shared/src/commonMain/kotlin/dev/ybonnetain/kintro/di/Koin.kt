@@ -1,5 +1,9 @@
-package dev.ybonnetain.kintro
+package dev.ybonnetain.kintro.di
 
+import dev.ybonnetain.kintro.Configuration
+import dev.ybonnetain.kintro.platformModule
+import dev.ybonnetain.kintro.repositories.Remote
+import dev.ybonnetain.kintro.repositories.Repository
 import kotlinx.serialization.json.Json
 
 import org.koin.core.context.startKoin

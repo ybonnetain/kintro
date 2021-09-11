@@ -3,20 +3,15 @@ package dev.ybonnetain.kintro.android.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import dev.ybonnetain.kintro.Greeting
 import android.widget.TextView
-import dev.ybonnetain.kintro.Repository
-import dev.ybonnetain.kintro.android.R
 
+import dev.ybonnetain.kintro.repositories.Repository
+import dev.ybonnetain.kintro.android.R
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-fun greet(): String {
-    return Greeting().greeting()
-}
 
 class DemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +19,7 @@ class DemoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_demo)
 
         val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        tv.text = "coucou"
 
 
         val repository = Repository()

@@ -25,7 +25,7 @@ kotlin {
         summary = "the business code"
         homepage = "no site"
         ios.deploymentTarget = "14.1"
-        frameworkName = "shared"
+        frameworkName = "Shared"
         podfile = project.file("../iosKintro/Podfile")
     }
     

@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro
+package dev.ybonnetain.kintro.repositories
 
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
