@@ -10,13 +10,17 @@ import SwiftUI
 import Shared
 
 struct CounterView: View {
-    @StateObject var viewModel = ContentViewModel(repository: Repository())
-
     var body: some View {
         ZStack {
             Color.yellow
             VStack {
                 HeaderView()
+                    
+                Text("The counter is basically what comes right after the hello world")
+                    .multilineTextAlignment(.center)
+                    .modifier(Description())
+                    .colorInvert()
+                    .padding()
 
                 HStack(spacing: 16) {
                     SumView()
@@ -24,13 +28,9 @@ struct CounterView: View {
                 }
                 .padding(.horizontal)
 
-                DescriptionView()
-                TodoView()
-
                 Spacer()
             }
             .padding(.top, 40)
-            .environmentObject(viewModel)
         }
         .modifier(IgnoredSafeAreaModifier())
     }
@@ -57,7 +57,7 @@ struct HeaderView: View {
 }
 
 struct SumView: View {
-    @EnvironmentObject var viewModel: ContentViewModel
+    @EnvironmentObject var viewModel: CounterViewModel
 
     var body: some View {
         VStack {
@@ -72,7 +72,7 @@ struct SumView: View {
                 .modifier(Number())
                 .colorInvert()
             Text("thing(s)")
-                .modifier(Excerpt())
+                .modifier(Description())
                 .colorInvert()
         }
         .modifier(CounterTile())
@@ -80,69 +80,27 @@ struct SumView: View {
 }
 
 struct AddView: View {
-    @EnvironmentObject var viewModel: ContentViewModel
+    @EnvironmentObject var viewModel: CounterViewModel
 
     var body: some View {
-        Button(action: {
-            viewModel.increment()
-            viewModel.getTodo(id: viewModel.count)
-        }) {
+        Button(action: { viewModel.increment() }) {
             VStack {
                 Text("Next")
                     .modifier(Title())
                 Image(systemName: "goforward.plus")
                     .modifier(Number())
                 Text("Fibonacci")
-                    .modifier(Excerpt())
+                    .modifier(Description())
             }
             .modifier(AdderTile())
         }
     }
 }
 
-struct TodoView: View {
-    @EnvironmentObject var viewModel: ContentViewModel
-
-    var body: some View {
-        if let todo = viewModel.todo {
-            VStack {
-                Image(systemName: "clock")
-                    .font(.system(size: 40))
-                    .foregroundColor(Color.orange)
-                Text(todo.title)
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
-            }
-            .padding()
-            .modifier(TodoTile())
-            .contextMenu {
-                Button {
-                    print("C'est fait")
-                } label: {
-                    Label("C'est fait", systemImage: "checkmark.circle")
-                }
-
-                Button {
-                    print("A faire")
-                } label: {
-                    Label("A faire", systemImage: "clock")
-                }
-            }
-        }
-    }
-}
-
-struct DescriptionView: View {
-    var body: some View {
-        Text("This is a mix of the Counter and the Todo list, the most famous hello-worlds of front-end development.")
-            .foregroundColor(.white)
-            .padding()
-    }
-}
-
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView()
+            .environmentObject(CounterViewModel())
     }
 }
 

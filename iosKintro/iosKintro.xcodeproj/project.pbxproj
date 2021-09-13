@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		836CA07726EE87BC009F27E5 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07626EE87BC009F27E5 /* ContentViewModel.swift */; };
+		833A750926EFDC74003E65BD /* TodosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833A750826EFDC74003E65BD /* TodosViewModel.swift */; };
+		833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833A750B26EFDDEA003E65BD /* TodosView.swift */; };
+		836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07626EE87BC009F27E5 /* CounterViewModel.swift */; };
 		836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07A26EE8CE7009F27E5 /* CounterView.swift */; };
 		8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155826ECD16A00606C32 /* ViewModifiers.swift */; };
 		8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155D26ECD27000606C32 /* UIColor+Extension.swift */; };
@@ -22,7 +24,9 @@
 		7555FF7B242A565900829871 /* iosKintro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosKintro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		836CA07626EE87BC009F27E5 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		833A750826EFDC74003E65BD /* TodosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewModel.swift; sourceTree = "<group>"; };
+		833A750B26EFDDEA003E65BD /* TodosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
+		836CA07626EE87BC009F27E5 /* CounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		836CA07A26EE8CE7009F27E5 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		8380155826ECD16A00606C32 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		8380155D26ECD27000606C32 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -81,19 +85,29 @@
 			isa = PBXGroup;
 			children = (
 				7555FF82242A565900829871 /* ContentView.swift */,
-				836CA07626EE87BC009F27E5 /* ContentViewModel.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				8380155B26ECD17100606C32 /* Helpers */,
 				836CA07D26EE942E009F27E5 /* Scenes */,
+				833A750526EFD49C003E65BD /* ViewModels */,
 			);
 			path = iosKintro;
+			sourceTree = "<group>";
+		};
+		833A750526EFD49C003E65BD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				836CA07626EE87BC009F27E5 /* CounterViewModel.swift */,
+				833A750826EFDC74003E65BD /* TodosViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		836CA07D26EE942E009F27E5 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				836CA07A26EE8CE7009F27E5 /* CounterView.swift */,
+				833A750B26EFDDEA003E65BD /* TodosView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -202,10 +216,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */,
+				833A750926EFDC74003E65BD /* TodosViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */,
-				836CA07726EE87BC009F27E5 /* ContentViewModel.swift in Sources */,
+				836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */,
+				833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */,
 				836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

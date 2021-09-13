@@ -2,8 +2,8 @@ package dev.ybonnetain.kintro.di
 
 import dev.ybonnetain.kintro.Configuration
 import dev.ybonnetain.kintro.platformModule
-import dev.ybonnetain.kintro.repositories.Remote
-import dev.ybonnetain.kintro.repositories.Repository
+import dev.ybonnetain.kintro.remote.TodosApi
+import dev.ybonnetain.kintro.repositories.Todos
 import kotlinx.serialization.json.Json
 
 import org.koin.core.context.startKoin
@@ -37,8 +37,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 fun shared() = module {
     single { createJson() }
     single { createHttpClient(get()) }
-    single { Remote(get()) }
-    single { Repository() }
+    single { TodosApi(get()) }
+    single { Todos() }
 }
 
 // Json serializer for HTTP responses

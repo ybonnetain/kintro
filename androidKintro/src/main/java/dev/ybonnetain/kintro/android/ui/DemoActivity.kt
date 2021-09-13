@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 
-import dev.ybonnetain.kintro.repositories.Repository
+import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.android.R
+import dev.ybonnetain.kintro.repositories.Todos
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -22,7 +23,7 @@ class DemoActivity : AppCompatActivity() {
         tv.text = "coucou"
 
 
-        val repository = Repository()
+        val repository = Todos()
         MainScope().launch(Dispatchers.IO) {
             kotlin.runCatching {
                 repository.getTodo(1)

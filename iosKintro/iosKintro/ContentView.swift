@@ -2,11 +2,13 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
-    @StateObject var viewModel = ContentViewModel(repository: Repository())
+    @StateObject var counterViewModel = CounterViewModel()
+    @StateObject var todosViewModel = TodosViewModel()
     
     var body: some View {
         MainTabbedView()
-            .environmentObject(viewModel)
+            .environmentObject(counterViewModel)
+            .environmentObject(todosViewModel)
     }
 }
 
@@ -27,24 +29,26 @@ struct MainTabbedView: View {
     var body: some View {
         GeometryReader { g in
             TabView(selection: $selectedTab) {
-                CounterView()
-                    .tabItem({
-                        VStack {
-                            Image(systemName: computeTabImageName(tab: Tab.counter))
-                            Text("Hello")
-                        }
-                    })
-                    .tag(Tab.counter)
+                CounterView().tabItem({
+                    VStack {
+                        Image(systemName: computeTabImageName(tab: Tab.counter))
+                            .foregroundColor(.black)
+                        Text("Hello")
+                    }
+                })
+                .tag(Tab.counter)
 
-                Text("todo todos").tabItem({
+               TodosView().tabItem({
                     VStack {
                         Image(systemName: computeTabImageName(tab: Tab.todos))
+                            .foregroundColor(.black)
                         Text("Todos")
                     }
                 })
                 .tag(Tab.todos)
 
-            }.accentColor(.pink) /// TabView
+            }
+            .accentColor(.orange) /// TabView
 
             ZStack {
                 ForEach(Tab.allCases) { t in
@@ -77,3 +81,12 @@ struct MainTabbedView: View {
         return tab == selectedTab ? imageName + ".fill" : imageName
     }
 }
+
+struct MainTabbedView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainTabbedView()
+            .environmentObject(CounterViewModel())
+        // TODO VM
+    }
+}
+

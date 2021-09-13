@@ -1,12 +1,9 @@
 package dev.ybonnetain.kintro.repositories
 
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-
-class Repository() : KoinComponent {
-    private val api : Remote by inject()
+class Counter() {
 
     var n = 0
+
     // last fibonacci term in the sequence from 0 to n terms
     fun incrementCounter() : Int {
         n++
@@ -16,10 +13,4 @@ class Repository() : KoinComponent {
             .toList()
             .last()
     }
-
-    @Throws(Exception::class)
-    suspend fun getTodos() = api.fetchTodos()
-
-    @Throws(Exception::class)
-    suspend fun getTodo(id: Int) = api.fetchTodo(id)
 }

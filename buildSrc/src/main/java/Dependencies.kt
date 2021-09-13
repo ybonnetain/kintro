@@ -11,6 +11,7 @@ object Versions {
 
 object Deps {
     object Gradle {
+        // https://youtrack.jetbrains.com/issue/KT-39833 (1.5.30-M1 + JDK x64) ?
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30" // TODO use Versions when all aligned to 1.5.30
         const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     }

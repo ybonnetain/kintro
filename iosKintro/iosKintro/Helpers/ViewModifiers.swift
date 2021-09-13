@@ -40,7 +40,7 @@ struct Number: ViewModifier {
     }
 }
 
-struct Excerpt: ViewModifier {
+struct Description: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.headline)
