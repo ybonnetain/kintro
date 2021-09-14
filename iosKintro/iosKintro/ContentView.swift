@@ -86,7 +86,8 @@ struct MainTabbedView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabbedView()
             .environmentObject(CounterViewModel())
-        // TODO VM
+            .environmentObject(TodosViewModel())
+
     }
 }
 

@@ -5,6 +5,7 @@ import Shared
 struct iOSApp: App {
     init() {
         KoinKt.doInitKoin()
+        setupUIKit()
     }
     
 	var body: some Scene {

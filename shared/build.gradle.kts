@@ -28,6 +28,20 @@ kotlin {
         frameworkName = "Shared"
         podfile = project.file("../iosKintro/Podfile")
     }
+
+    // TODO: use IR backend ! when using it cannot import common classes in kjs source base
+    js {
+//        browser()
+        compilations.all {
+            kotlinOptions {
+                moduleKind = "commonjs"
+            }
+        }
+    }
+//    js(IR) {
+//        useCommonJs()
+//        browser()
+//    }
     
     sourceSets {
         val commonMain by getting {
@@ -68,6 +82,11 @@ kotlin {
             }
         }
         val iosTest by getting
+        val jsMain by getting {
+            dependencies {
+                implementation(Deps.Ktor.js)
+            }
+        }
     }
 }
 

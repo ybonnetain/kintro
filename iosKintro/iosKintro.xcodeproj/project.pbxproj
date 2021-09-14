@@ -15,6 +15,9 @@
 		836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07A26EE8CE7009F27E5 /* CounterView.swift */; };
 		8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155826ECD16A00606C32 /* ViewModifiers.swift */; };
 		8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155D26ECD27000606C32 /* UIColor+Extension.swift */; };
+		83A5E87426F10F4900ADD45A /* UIAppearancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5E87326F10F4900ADD45A /* UIAppearancer.swift */; };
+		83A5E87626F111B300ADD45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83A5E87526F111B300ADD45A /* Assets.xcassets */; };
+		83A5E87826F114C000ADD45A /* TodoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5E87726F114C000ADD45A /* TodoDetailView.swift */; };
 		EB541F12D5CE9DB6918413E5 /* Pods_iosKintro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB2C48C799A4DACA96BC4A6 /* Pods_iosKintro.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,9 @@
 		836CA07A26EE8CE7009F27E5 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		8380155826ECD16A00606C32 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		8380155D26ECD27000606C32 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		83A5E87326F10F4900ADD45A /* UIAppearancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppearancer.swift; sourceTree = "<group>"; };
+		83A5E87526F111B300ADD45A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83A5E87726F114C000ADD45A /* TodoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailView.swift; sourceTree = "<group>"; };
 		90453D903DC0705494D365DC /* Pods-iosKintro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosKintro.release.xcconfig"; path = "Target Support Files/Pods-iosKintro/Pods-iosKintro.release.xcconfig"; sourceTree = "<group>"; };
 		BAB2C48C799A4DACA96BC4A6 /* Pods_iosKintro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosKintro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,6 +96,7 @@
 				8380155B26ECD17100606C32 /* Helpers */,
 				836CA07D26EE942E009F27E5 /* Scenes */,
 				833A750526EFD49C003E65BD /* ViewModels */,
+				83A5E87526F111B300ADD45A /* Assets.xcassets */,
 			);
 			path = iosKintro;
 			sourceTree = "<group>";
@@ -108,6 +115,7 @@
 			children = (
 				836CA07A26EE8CE7009F27E5 /* CounterView.swift */,
 				833A750B26EFDDEA003E65BD /* TodosView.swift */,
+				83A5E87726F114C000ADD45A /* TodoDetailView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -117,6 +125,7 @@
 			children = (
 				8380155826ECD16A00606C32 /* ViewModifiers.swift */,
 				8380155D26ECD27000606C32 /* UIColor+Extension.swift */,
+				83A5E87326F10F4900ADD45A /* UIAppearancer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -180,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A5E87626F111B300ADD45A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,9 +226,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */,
+				83A5E87426F10F4900ADD45A /* UIAppearancer.swift in Sources */,
 				833A750926EFDC74003E65BD /* TodosViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				83A5E87826F114C000ADD45A /* TodoDetailView.swift in Sources */,
 				8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */,
 				836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */,
 				833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */,
@@ -351,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8UL47K7LQ3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosKintro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -370,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8UL47K7LQ3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosKintro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
