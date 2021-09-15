@@ -76,6 +76,35 @@ struct SumView: View {
                 .colorInvert()
         }
         .modifier(CounterTile())
+        
+        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .contextMenu {
+            
+            if #available(iOS 15.0, *) {
+                Button {
+                    //
+                } label: {
+                    Label("Add 12", systemImage: "plus")
+                }
+                Button {
+                    //
+                } label: {
+                    Label("Remove 12", systemImage: "minus")
+                }.disabled(true)
+                
+                Divider()
+                
+                Button(role: .destructive) {
+                    //
+                } label: {
+                    Label("Reset", systemImage: "trash")
+                }
+            } else {
+                // Fallback on earlier versions
+            }
+            
+        }
+        
     }
 }
 

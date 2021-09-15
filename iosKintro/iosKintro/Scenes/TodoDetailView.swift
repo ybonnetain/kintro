@@ -10,12 +10,13 @@ import SwiftUI
 import Shared
 
 struct TodoDetailView: View {
+    @Environment(\.isPreview) var isPreview
     @EnvironmentObject var viewModel : TodosViewModel
     
     let todo : Todo
     var body: some View {
         ZStack {
-Color(red: 242/255, green: 242/255, blue: 247/255) // TODO: Color+Extension :)
+            Color.layout
             VStack {
                 TodoDetailTileView(heading: "User") {
                     Text(viewModel.user?.name ?? "name")
@@ -39,15 +40,15 @@ Color(red: 242/255, green: 242/255, blue: 247/255) // TODO: Color+Extension :)
         .if(viewModel.loading) {
             $0.overlay(
                ZStack {
-Color(red: 242/255, green: 242/255, blue: 247/255) // TODO: Color+Extension :)
-   .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                   Color.layout
+                       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                    ProgressView()
                }
            )
         }
-        .onAppear(perform: {
-            viewModel.getUser(id: todo.userId)
-        })
+        .onAppear {
+            if !isPreview { viewModel.getUser(id: todo.userId) }
+        }
     }
 }
 
@@ -66,16 +67,18 @@ struct TodoDetailTileView<Content: View>: View {
             }
             .padding()
         }
-.frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 180) // TODO verify
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 180) // TODO verify
         .cornerRadius(16)
         .padding()
     }
 }
 
 struct TodoDetailView_Previews: PreviewProvider {
+    
     static let todo = Todo(id: 1, userId: 1, title: "Mon super todo", completed: false)
     static var previews: some View {
         TodoDetailView(todo: todo)
             .environmentObject(TodosViewModel())
+            .preferredColorScheme(.dark)
     }
 }

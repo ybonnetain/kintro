@@ -1,5 +1,6 @@
 // https://kotlinlang.org/docs/mpp-dsl-reference.html
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     kotlin("multiplatform")
@@ -13,6 +14,7 @@ version = "1.0"
 kotlin {
     android()
 
+    // define the kotlin native target to be invoked to match the target arch
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
         System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64 // available to KT 1.5.30
@@ -21,12 +23,25 @@ kotlin {
 
     iosTarget("ios") {}
 
+    // https://kotlinlang.org/docs/native-cocoapods.html
+    // When sync this will produce the framework's podspec
     cocoapods {
-        summary = "the business code"
-        homepage = "no site"
-        ios.deploymentTarget = "14.1"
-        frameworkName = "Shared"
-        podfile = project.file("../iosKintro/Podfile")
+        framework {
+            summary = "the business code"
+            homepage = "https://ybonnetain.dev/blog-kotlin-multiplatform"
+            baseName = "Shared"
+            // (Optional) do a dynamic framework to enable SwiftUI previews,
+            // If you use a pod dependency in Gradle project, then ensure that your project's Podfile has use_frameworks!
+            isStatic = false
+            // embedBitcode(BITCODE) // (Optional) Dependency export
+
+            // below goes the pods dependencies and the deployment target
+            ios.deploymentTarget = "14.1"
+        }
+
+        // Maps custom Xcode configuration to NativeBuildType
+        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 
     // TODO: use IR backend ! when using it cannot import common classes in kjs source base

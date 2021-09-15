@@ -36,9 +36,9 @@ class TodosViewModel : ObservableObject {
     func getTodo(id: Int) {
         self.loading = true
         self.repository.getTodo(id: Int32(id), completionHandler: { todo, error in
+            self.loading = false
             if todo != nil {
                 self.todo = todo
-                self.loading = false
             }
         })
     }
@@ -46,9 +46,9 @@ class TodosViewModel : ObservableObject {
     func getTodos() {
         self.loading = true
         self.repository.getTodos(completionHandler: { todos, error in
+            self.loading = false
             if let todos = todos {
                 self.todos = todos
-                self.loading = false
             }
         })
     }
@@ -56,9 +56,9 @@ class TodosViewModel : ObservableObject {
     func getUser(id: Int32) {
         self.loading = true
         self.repository.getUser(id: Int32(id), completionHandler: { user, error in
+            self.loading = false
             if user != nil {
                 self.user = user
-                self.loading = false
             }
         })
     }
@@ -66,9 +66,9 @@ class TodosViewModel : ObservableObject {
     func getUsers() {
         self.loading = true
         self.repository.getUsers(completionHandler: { users, error in
+            self.loading = false
             if let users = users {
                 self.users = users
-                self.loading = false
             }
         })
     }

@@ -12,7 +12,7 @@ import Shared
 
 struct TodosView: View {
     @EnvironmentObject var viewModel : TodosViewModel
-    @State var isPresenting : Bool = false
+    @State private var isPresenting : Bool = false
     
     var body: some View {
         NavigationView {
@@ -27,7 +27,7 @@ struct TodosView: View {
                             TodoListItem(item: t)
                         }
                     }
-
+                    
                     Section(
                         header: Text("Already Done"),
                         footer: Text("Congratulation, what is done is DONE")
@@ -43,12 +43,12 @@ struct TodosView: View {
             
             .if(viewModel.loading) {
                 $0.overlay(
-                   ZStack {
-                       Color(red: 242/255, green: 242/255, blue: 247/255) // TODO: Color+Extension :)
-                           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                       ProgressView()
-                   }
-               )
+                    ZStack {
+                        Color.layout
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        ProgressView()
+                    }
+                )
             }
             
             .navigationTitle("Todos")
@@ -64,37 +64,53 @@ struct TodosView: View {
         }
         
         .sheet(isPresented: $isPresenting, content: {
-            Image("todo-list")
-                .resizable()
-                .scaledToFit()
-            Text("The todo list is usually the second tuto after the basic counter")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .padding()
-            Text("It holds more potential by giving us the ability to start implementing a CRUD module")
-                .multilineTextAlignment(.center)
-                .font(.callout)
-                .padding()
-                
+            Readme()
         })
     }
 }
 
 struct TodoListItem: View {
     let item : Todo
+    
     var body: some View {
         NavigationLink(destination: TodoDetailView(todo: item)) {
-            VStack(alignment: .leading) {
-                Text(item.title)
-                    .font(.body)
-            }
+            Text(item.title)
+                .font(.body)
+        }
+    }
+}
+
+struct Readme: View {
+    var body: some View {
+        VStack {
+            Image("coin")
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+                .padding(60)
+            Text("quack")
+                .multilineTextAlignment(.center)
+                .font(.system(size: 32, weight: .black, design: .rounded))
+                .padding()
+            Text("lorem")
+                .multilineTextAlignment(.center)
+                .font(.callout)
+                .padding(40)
         }
     }
 }
 
 struct TodosView_Previews: PreviewProvider {
     static var previews: some View {
-        TodosView()
-            .environmentObject(TodosViewModel())
+        ForEach(ColorScheme.allCases, id: \.self) {
+            Readme()
+                .preferredColorScheme($0)
+        }
+        
+        ForEach(["fr", "en"], id: \.self) { lang in
+            Readme()
+                .environment(\.locale, Locale(identifier: lang))
+        }
+        
     }
 }
