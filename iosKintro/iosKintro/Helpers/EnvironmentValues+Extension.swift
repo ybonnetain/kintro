@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public extension EnvironmentValues {
+extension EnvironmentValues {
     
     // Detect if Xcode is running SwiftUI previews
     // This will be useful to conditionally invoke view models and such

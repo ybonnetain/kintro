@@ -107,7 +107,7 @@ struct TodosView_Previews: PreviewProvider {
                 .preferredColorScheme($0)
         }
         
-        ForEach(["fr", "en"], id: \.self) { lang in
+        ForEach(["ja", "fr", "en"], id: \.self) { lang in
             Readme()
                 .environment(\.locale, Locale(identifier: lang))
         }

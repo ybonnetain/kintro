@@ -43,6 +43,7 @@
 		83A5E87326F10F4900ADD45A /* UIAppearancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppearancer.swift; sourceTree = "<group>"; };
 		83A5E87526F111B300ADD45A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83A5E87726F114C000ADD45A /* TodoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailView.swift; sourceTree = "<group>"; };
+		83CBEE1226F37CCD00CE4D74 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		90453D903DC0705494D365DC /* Pods-iosKintro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosKintro.release.xcconfig"; path = "Target Support Files/Pods-iosKintro/Pods-iosKintro.release.xcconfig"; sourceTree = "<group>"; };
 		BAB2C48C799A4DACA96BC4A6 /* Pods_iosKintro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosKintro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -185,6 +186,7 @@
 				en,
 				Base,
 				fr,
+				ja,
 			);
 			mainGroup = 7555FF72242A565900829871;
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
@@ -278,6 +280,7 @@
 			children = (
 				830BA7AF26F2902A00C41E86 /* en */,
 				830BA7B126F2902D00C41E86 /* fr */,
+				83CBEE1226F37CCD00CE4D74 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

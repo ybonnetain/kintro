@@ -84,12 +84,7 @@ struct SumView: View {
                 Button {
                     //
                 } label: {
-                    Label("Add 12", systemImage: "plus")
-                }
-                Button {
-                    //
-                } label: {
-                    Label("Remove 12", systemImage: "minus")
+                    Label("Previous term", systemImage: "minus")
                 }.disabled(true)
                 
                 Divider()
@@ -132,4 +127,3 @@ struct CounterView_Previews: PreviewProvider {
             .environmentObject(CounterViewModel())
     }
 }
-
