@@ -3,12 +3,12 @@ import Shared
 
 struct ContentView: View {
     @StateObject var counterViewModel = CounterViewModel()
-    @StateObject var todosViewModel = TodosViewModel()
+    @StateObject var store = ObservableTodosStore()
     
     var body: some View {
         MainTabbedView()
             .environmentObject(counterViewModel)
-            .environmentObject(todosViewModel)
+            .environmentObject(store)
     }
 }
 
@@ -86,7 +86,6 @@ struct MainTabbedView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabbedView()
             .environmentObject(CounterViewModel())
-            .environmentObject(TodosViewModel())
 
     }
 }

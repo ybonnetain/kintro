@@ -11,7 +11,6 @@ import Shared
 
 struct TodoDetailView: View {
     @Environment(\.isPreview) var isPreview
-    @EnvironmentObject var viewModel : TodosViewModel
     
     let todo : Todo
     var body: some View {
@@ -19,9 +18,9 @@ struct TodoDetailView: View {
             Color.layout
             VStack {
                 TodoDetailTileView(heading: "User") {
-                    Text(viewModel.user?.name ?? "name")
-                    Text(viewModel.user?.username ?? "username")
-                    Text(viewModel.user?.email ?? "email")
+                    Text("name")
+                    Text("username")
+                    Text("email")
                 }
                 
                 TodoDetailTileView(heading: "Todo") {
@@ -37,7 +36,7 @@ struct TodoDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
 
-        .if(viewModel.loading) {
+        .if(false) {
             $0.overlay(
                ZStack {
                    Color.layout
@@ -47,7 +46,7 @@ struct TodoDetailView: View {
            )
         }
         .onAppear {
-            if !isPreview { viewModel.getUser(id: todo.userId) }
+            if !isPreview { print("load side effect here" ) }
         }
     }
 }
@@ -78,7 +77,6 @@ struct TodoDetailView_Previews: PreviewProvider {
     static let todo = Todo(id: 1, userId: 1, title: "Mon super todo", completed: false)
     static var previews: some View {
         TodoDetailView(todo: todo)
-            .environmentObject(TodosViewModel())
             .preferredColorScheme(.dark)
     }
 }

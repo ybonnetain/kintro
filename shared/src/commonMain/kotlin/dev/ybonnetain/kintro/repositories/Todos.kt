@@ -4,7 +4,7 @@ import dev.ybonnetain.kintro.remote.TodosApi
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class Todos() : KoinComponent {
+internal class TodosRepository() : KoinComponent {
     private val api : TodosApi by inject()
 
     @Throws(Exception::class)
@@ -18,9 +18,4 @@ class Todos() : KoinComponent {
 
     @Throws(Exception::class)
     suspend fun getUser(id: Int) = api.fetchUser(id)
-
-    companion object {
-        const val DONE = "done"
-        const val TODO = "todo"
-    }
 }

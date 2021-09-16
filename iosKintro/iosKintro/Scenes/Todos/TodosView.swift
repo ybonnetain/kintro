@@ -11,7 +11,8 @@ import UIKit
 import Shared
 
 struct TodosView: View {
-    @EnvironmentObject var viewModel : TodosViewModel
+    @Environment(\.isPreview) var isPreview
+    @EnvironmentObject var store : ObservableTodosStore
     @State private var isPresenting : Bool = false
     
     var body: some View {
@@ -23,25 +24,16 @@ struct TodosView: View {
                         footer: Text("La procrastination est une tendance à remettre systématiquement au lendemain des actions. Le « retardataire chronique », appelé procrastinateur, n’arrive pas à se « mettre au travail », surtout lorsque cela ne lui procure pas de satisfaction immédiate.")
                             .font(.footnote)
                     ) {
-                        ForEach(viewModel.groupedTodos[TodosViewModel.Statuses.todo] ?? [], id: \.id) { t in
+                        ForEach(store.state.todos, id: \.id) { t in
                             TodoListItem(item: t)
                         }
                     }
                     
-                    Section(
-                        header: Text("Already Done"),
-                        footer: Text("Congratulation, what is done is DONE")
-                            .font(.footnote)
-                    ) {
-                        ForEach(viewModel.groupedTodos[TodosViewModel.Statuses.done] ?? [], id: \.id) { t in
-                            TodoListItem(item: t)
-                        }
-                    }
                 }
                 .listStyle(InsetGroupedListStyle())
             }
             
-            .if(viewModel.loading) {
+            .if(store.state.loading) {
                 $0.overlay(
                     ZStack {
                         Color.layout
@@ -60,9 +52,13 @@ struct TodosView: View {
             )
         }
         .onAppear() {
-            viewModel.getTodos()
+            if !isPreview { store.dispatch(TodosAction.Load()) }
         }
-        
+        .onReceive(store.$sideEffect) { value in
+            if let errorMessage = (value as? TodosSideEffect.Error)?.error.message {
+               print("error \(errorMessage)")
+            }
+        }
         .sheet(isPresented: $isPresenting, content: {
             Readme()
         })
@@ -101,7 +97,11 @@ struct Readme: View {
 }
 
 struct TodosView_Previews: PreviewProvider {
+    static let dummyTodo = Todo(id: 1, userId: 1, title: "dummy todo", completed: false)
     static var previews: some View {
+        TodosView()
+            .environmentObject(ObservableTodosStore(withInitialState: TodosState(todos: [dummyTodo], loading: false)))
+        
         ForEach(ColorScheme.allCases, id: \.self) {
             Readme()
                 .preferredColorScheme($0)
