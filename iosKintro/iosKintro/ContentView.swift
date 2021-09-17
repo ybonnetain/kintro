@@ -3,12 +3,14 @@ import Shared
 
 struct ContentView: View {
     @StateObject var counterViewModel = CounterViewModel()
-    @StateObject var store = ObservableTodosStore()
+    @StateObject var todosStore = ObservableTodosStore()
+    @StateObject var usersStore = ObservableUsersStore()
     
     var body: some View {
         MainTabbedView()
             .environmentObject(counterViewModel)
-            .environmentObject(store)
+            .environmentObject(todosStore)
+            .environmentObject(usersStore)
     }
 }
 
@@ -27,7 +29,7 @@ struct MainTabbedView: View {
     private var badgedTabs = [Tab.todos]
 
     var body: some View {
-        GeometryReader { g in
+        GeometryReader  { g in
             TabView(selection: $selectedTab) {
                 CounterView().tabItem({
                     VStack {
@@ -81,12 +83,3 @@ struct MainTabbedView: View {
         return tab == selectedTab ? imageName + ".fill" : imageName
     }
 }
-
-struct MainTabbedView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTabbedView()
-            .environmentObject(CounterViewModel())
-
-    }
-}
-

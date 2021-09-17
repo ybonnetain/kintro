@@ -1,5 +1,5 @@
 //
-//  ObservableTodosStore.swift
+//  ObservableUsersStore.swift
 //  iosKintro
 //
 //  Created by zahn on 16/09/2021.
@@ -9,11 +9,11 @@
 import SwiftUI
 import Shared
 
-class ObservableTodosStore: ObservableObject {
-    @Published private(set) var state = TodosState(todos: [], loading: false)
-    @Published private(set) var sideEffect: TodosSideEffect?
+class ObservableUsersStore: ObservableObject {
+    @Published private(set) var state = UsersState(users: [], loading: false)
+    @Published private(set) var sideEffect: UsersSideEffect?
     
-    let store = TodosStore()
+    let store = UsersStore()
     
     var stateWatcher : Closeable?
     var sideEffectWatcher : Closeable?
@@ -28,12 +28,12 @@ class ObservableTodosStore: ObservableObject {
         })
     }
     
-    convenience init(withInitialState state: TodosState) { // we can use in previews
+    convenience init(withInitialState state: UsersState) { // we can use in previews
         self.init()
         self.state = state
     }
     
-    public func dispatch(_ action: TodosAction) {
+    public func dispatch(_ action: UsersAction) {
         store.dispatch(action: action)
     }
     
@@ -42,3 +42,4 @@ class ObservableTodosStore: ObservableObject {
         sideEffectWatcher?.close()
     }
 }
+

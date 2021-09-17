@@ -13,6 +13,7 @@
 		830BA7AE26F2902A00C41E86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830BA7B026F2902A00C41E86 /* Localizable.strings */; };
 		830BA7B326F29DCB00C41E86 /* EnvironmentValues+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830BA7B226F29DCB00C41E86 /* EnvironmentValues+Extension.swift */; };
 		833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833A750B26EFDDEA003E65BD /* TodosView.swift */; };
+		8345C22326F47A44008EF088 /* ObservableUsersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345C22226F47A44008EF088 /* ObservableUsersStore.swift */; };
 		836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07626EE87BC009F27E5 /* CounterViewModel.swift */; };
 		836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07A26EE8CE7009F27E5 /* CounterView.swift */; };
 		8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155826ECD16A00606C32 /* ViewModifiers.swift */; };
@@ -35,6 +36,7 @@
 		830BA7B126F2902D00C41E86 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		830BA7B226F29DCB00C41E86 /* EnvironmentValues+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extension.swift"; sourceTree = "<group>"; };
 		833A750B26EFDDEA003E65BD /* TodosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
+		8345C22226F47A44008EF088 /* ObservableUsersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableUsersStore.swift; sourceTree = "<group>"; };
 		836CA07626EE87BC009F27E5 /* CounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		836CA07A26EE8CE7009F27E5 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		8380155826ECD16A00606C32 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				833A750B26EFDDEA003E65BD /* TodosView.swift */,
 				83A5E87726F114C000ADD45A /* TodoDetailView.swift */,
 				83F134F526F3D49200EA6960 /* ObservableTodosStore.swift */,
+				8345C22226F47A44008EF088 /* ObservableUsersStore.swift */,
 			);
 			path = Todos;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				83A5E87826F114C000ADD45A /* TodoDetailView.swift in Sources */,
 				8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */,
 				836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */,
+				8345C22326F47A44008EF088 /* ObservableUsersStore.swift in Sources */,
 				833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */,
 				830BA7AA26F2728F00C41E86 /* Color+Extension.swift in Sources */,
 				836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */,

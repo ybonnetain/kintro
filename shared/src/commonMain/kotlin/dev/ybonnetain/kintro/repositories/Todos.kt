@@ -12,10 +12,4 @@ internal class TodosRepository() : KoinComponent {
 
     @Throws(Exception::class)
     suspend fun getTodo(id: Int) = api.fetchTodo(id)
-
-    @Throws(Exception::class)
-    suspend fun getUsers() = api.fetchUsers()
-
-    @Throws(Exception::class)
-    suspend fun getUser(id: Int) = api.fetchUser(id)
 }

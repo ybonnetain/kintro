@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import UIKit
 import Shared
 
 struct TodosView: View {

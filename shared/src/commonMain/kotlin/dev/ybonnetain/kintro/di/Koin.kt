@@ -3,8 +3,11 @@ package dev.ybonnetain.kintro.di
 import dev.ybonnetain.kintro.Configuration
 import dev.ybonnetain.kintro.platformModule
 import dev.ybonnetain.kintro.remote.TodosApi
+import dev.ybonnetain.kintro.remote.UsersApi
 import dev.ybonnetain.kintro.repositories.TodosRepository
+import dev.ybonnetain.kintro.repositories.UsersRepository
 import dev.ybonnetain.kintro.store.TodosStore
+import dev.ybonnetain.kintro.store.UsersStore
 import kotlinx.serialization.json.Json
 
 import org.koin.core.context.startKoin
@@ -42,6 +45,10 @@ fun shared() = module {
     single { TodosApi(get()) }
     single { TodosRepository() }
     single { TodosStore() }
+
+    single { UsersApi(get()) }
+    single { UsersRepository() }
+    single { UsersStore() }
 }
 
 // Json serializer for HTTP responses

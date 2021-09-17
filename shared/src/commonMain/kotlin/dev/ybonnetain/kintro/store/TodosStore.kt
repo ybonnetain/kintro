@@ -1,7 +1,5 @@
 package dev.ybonnetain.kintro.store
 
-import dev.ybonnetain.kintro.models.Todo
-import dev.ybonnetain.kintro.repositories.TodosRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,6 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+
+import dev.ybonnetain.kintro.models.Todo
+import dev.ybonnetain.kintro.repositories.TodosRepository
 
 data class TodosState(
     val todos: List<Todo>,
@@ -67,8 +68,7 @@ class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
     private suspend fun loadTodos() {
         try {
             dispatch(TodosAction.Loading(true))
-            val todos = repository.getTodos()
-            dispatch(TodosAction.Data(todos))
+            dispatch(TodosAction.Data(repository.getTodos()))
         } catch (e: Exception) {
             dispatch(TodosAction.Error(e))
         } finally {
