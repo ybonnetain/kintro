@@ -12,8 +12,8 @@ brew install openjdk@11
 ```
 ## IDE
 
-* **Android Studio 2020.3.1** (minSdk: level 21)
-* **Xcode 13+** (deloyment target: ios 14.1)
+* **Android Studio** (2020.3.1)
+* **Xcode** (v13)
 
 ## Applications
 
