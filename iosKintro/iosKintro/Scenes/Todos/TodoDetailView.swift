@@ -1,6 +1,6 @@
 //
 //  TodoDetailView.swift
-//  TodoDetailView
+//  iosKintro
 //
 //  Created by zahn on 14/09/2021.
 //  Copyright © 2021 orgName. All rights reserved.
@@ -11,17 +11,18 @@ import Shared
 
 struct TodoDetailView: View {
     @Environment(\.isPreview) var isPreview
-    @EnvironmentObject var viewModel : TodosViewModel
+    @EnvironmentObject var store : ObservableUsersStore
     
     let todo : Todo
+    
     var body: some View {
         ZStack {
             Color.layout
             VStack {
                 TodoDetailTileView(heading: "User") {
-                    Text(viewModel.user?.name ?? "name")
-                    Text(viewModel.user?.username ?? "username")
-                    Text(viewModel.user?.email ?? "email")
+                    Text(self.findUser(id: todo.userId, store: store)?.name ?? "name")
+                    Text(self.findUser(id: todo.userId, store: store)?.username ?? "username")
+                    Text(self.findUser(id: todo.userId, store: store)?.email ?? "email")
                 }
                 
                 TodoDetailTileView(heading: "Todo") {
@@ -31,13 +32,11 @@ struct TodoDetailView: View {
                 }
                 
                 Spacer()
-                
             }
             .navigationTitle("Detail")
             .navigationBarTitleDisplayMode(.inline)
         }
-
-        .if(viewModel.loading) {
+        .if(store.state.loading) {
             $0.overlay(
                ZStack {
                    Color.layout
@@ -47,8 +46,17 @@ struct TodoDetailView: View {
            )
         }
         .onAppear {
-            if !isPreview { viewModel.getUser(id: todo.userId) }
+            if !isPreview { store.dispatch(UsersAction.Load()) }
         }
+        .onReceive(store.$sideEffect) { value in
+            if let errorMessage = (value as? UsersSideEffect.Error)?.error.message {
+               print("error \(errorMessage)")
+            }
+        }
+    }
+    
+    private func findUser(id: Int32, store: ObservableUsersStore) -> User? {
+        return store.state.users.first(where: { $0.id == Int(id) })
     }
 }
 
@@ -64,6 +72,7 @@ struct TodoDetailTileView<Content: View>: View {
                     .modifier(Description())
                 Divider()
                 content
+                    .foregroundColor(Color.black)
             }
             .padding()
         }
@@ -76,9 +85,10 @@ struct TodoDetailTileView<Content: View>: View {
 struct TodoDetailView_Previews: PreviewProvider {
     
     static let todo = Todo(id: 1, userId: 1, title: "Mon super todo", completed: false)
+    static let user = User(id: 1, name: "jean-michel cornalin", username: "jmco", email: "jmcornalin@test12.dev")
     static var previews: some View {
         TodoDetailView(todo: todo)
-            .environmentObject(TodosViewModel())
+            .environmentObject(ObservableUsersStore(withInitialState: UsersState(users: [user], loading: false)))
             .preferredColorScheme(.dark)
     }
 }
