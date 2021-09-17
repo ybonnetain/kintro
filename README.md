@@ -4,7 +4,7 @@ This project is intended at giving a first introduction to `kotlin multiplatform
 
 ## Prerequisites
 
-To run all platforms in the project `macOS 10.15+` is necessary.
+To run all platforms in the project *macos* is necessary.
 
 ```shell
 # gradle 7 requires JDK 11
@@ -12,16 +12,16 @@ brew install openjdk@11
 ```
 ## IDE
 
-* **Android Studio** (2020.3.1)
-* **Xcode** (v13)
+* Android Studio *(2020.3.1)*
+* Xcode *(v13)*
 
 ## Applications
 
 All implement the shared module
 
-* Android `Compose` app
-* iOS `SwiftUI` app
-* Web `HTMLElement` vanilla app (also React in Kotlin is possible)
+* Android -  `Compose` app
+* iOS - `SwiftUI` app
+* Web -  `HTMLElement` vanilla app (also React in Kotlin is possible)
 
 ## Resources
 
