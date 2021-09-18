@@ -1,61 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8">
-      <title>Kintro - web</title>
-      <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Kintro - web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+      body {
+        background-color:#e6e63d;
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
   </head>
-  <body>
+  <body class="container">
 
-    <!-- the web app is a tree of custom HTML5 elements with JavaScript controlled lifecycle -->
-    <main>
-      <kintro-app>
-        <ul is="todos-list" />
-      </kintro-app>
-    </main>
+    <!-- the web app is a tree of custom HTML5 elements with JavaScript controlled lifecycles -->
+    <kintro-app>
+      <app-counter></app-counter>
+      <app-todos></app-todos>
+    </kintro-app>
 
     <!-- templates are elements that will not be rendered in the DOM but accessible by JavaScript in custom elements -->
-    <template id="tpl-todo-item">
-      <article>
-        before slot: <slot name="slot-title">default todo's title</slot>: After slot
-      </article>
+    <template id="app">
+      <style>
+        :host {
+          font-size: 54px;
+        }
+      </style>
+      <div>
+        <h1>Hello</h1>
+        <h2>Web Components + KMP</h2>
+        <slot></slot><!-- counter slot -->
+        <slot></slot><!-- todos slot -->
+      </div>
+    </template>
+
+    <template id="counter">
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <style>
+        :host {
+          color: white;
+        }
+      </style>
+      <b>counter</b>
+    </template>
+
+    <template id="todos">
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <b>todos</b>
     </template>
 
     <script src="/Users/zahn/devel/perso/kintro/webKintro/build/distributions/webKintro.js"></script>
     <script>
 
       (function() {
-        "use strict";
-
-        if (typeof window != "object")
-          return;
+        'use strict';
 
         // https://alligator.io/web-components/attributes-properties/
+        // https://developers.google.com/web/fundamentals/web-components/customelements
         
         const ELEM_APP = 'kintro-app'
-          , ELEM_LIST = 'todos-list'
-          , ELEM_LIST_ITEM = 'todo-item'
-          , TMPL_LIST_ITEM = 'tpl-todo-item'
+        , ELEM_COUNTER = 'app-counter'
+        , ELEM_TODOS = 'app-todos'
         
-        // Helper functions to get DOM elements and templates
-        //
-        function getApp() {
-          return document.querySelector(ELEM_APP)
-        }
-        // function getList() {
-        //   return document.querySelector(ELEM_LIST)
-        // }
-        function getListItemTemplate() {
-          return document.getElementById(TMPL_LIST_ITEM)
-        }
-
         const App = class extends HTMLElement {
           static get observedAttributes() {
             return ['loading'];
           }
-          // constructor() {
-          //   super()
-          // }
+          constructor() {
+            super()
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#app').content.cloneNode(true));
+          }
           attributeChangedCallback(name, previous, next) {
             switch (name) {
               case 'loading':
@@ -66,46 +83,54 @@
           }
         }
 
-        ,TodosList = class extends HTMLUListElement {
+        ,Todos = class extends HTMLElement {
+          constructor() {
+            super()
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#todos').content.cloneNode(true));
+
+            const ul = document.createElement('ul')
+            ul.setAttribute('class', 'list-group list-group-flush')
+            ul.innerHTML = `
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            `
+            this.shadowRoot.appendChild(ul)
+          }
           connectedCallback() {
-            webKintro.Shared.observe(this.onStateChange)
-            webKintro.Shared.dispatch(webKintro.Shared.load)
+            this.populate([{ title: 'foo' }, { title: 'bar' }])
+            // webKintro.Shared.observe(this.onStateChange)
+            // webKintro.Shared.dispatch(webKintro.Shared.load)
           }
           onStateChange = (state) => {
             this.populate(state.todos)
-            getApp().setAttribute('loading', state.loading)
+            document.querySelector(ELEM_APP).setAttribute('loading', state.loading)
           }
           populate(todos) {
-            if (todos.size > 0) {
-             
-
-              todos.toArray().forEach(t => {
-
-
-                // https://javascript.info/slots-composition
-
-                // this.appendChild(new TodoListItem())
-                this.insertAdjacentHTML('beforeEnd', '<li slot="item">Lollipop</li>')
-              
+            // if (todos.size > 0) {
+            if (todos.length > 0) {
+              // todos.toArray().forEach(todo => {
+              todos.forEach(todo => {
+                // this.insertAdjacentHTML('afterBegin', `<tr><td>coucou</td></tr>`)
               })
             }
           }
         }
 
-        ,TodoListItem = class extends HTMLLIElement {
+        ,Counter = class extends HTMLElement {
           constructor() {
             super()
-            
-            let content = getListItemTemplate().content;
-            // TODO update slot
-            content.appendChild(title)
-              this.appendChild(content.cloneNode(true));
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#counter').content.cloneNode(true));
           }
         }
 
         customElements.define(ELEM_APP, App)
-        customElements.define(ELEM_LIST, TodosList, { extends: 'ul' })
-        customElements.define(ELEM_LIST_ITEM, TodoListItem, { extends: 'li' })
+        customElements.define(ELEM_COUNTER, Counter)
+        customElements.define(ELEM_TODOS, Todos)
 
         window.onload = function() {
           
