@@ -1,30 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kintro - web</title>
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-</head>
-<body>
-<div id="root"></div>
-<script src="/Users/zahn/devel/perso/kintro/webKintro/build/distributions/webKintro.js"></script>
+  <head>
+      <meta charset="UTF-8">
+      <title>Kintro - web</title>
+      <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  </head>
+  <body>
 
-<script>
-  window.onload = function () {
-    // webKintro.main()
-    console.log(webKintro)
+    <!-- the web app is a tree of custom HTML5 elements with JavaScript controlled lifecycle -->
+    <main>
+      <kintro-app>
+        <ul is="todos-list" />
+      </kintro-app>
+    </main>
 
-    function observeState (state) {
-      if (state.loading) return
-      console.log(state.users.toArray())
-      // Array(state.users).map(console.log)
+    <!-- templates are elements that will not be rendered in the DOM but accessible by JavaScript in custom elements -->
+    <template id="tpl-todo-item">
+      <article>
+        before slot: <slot name="slot-title">default todo's title</slot>: After slot
+      </article>
+    </template>
 
-    }
+    <script src="/Users/zahn/devel/perso/kintro/webKintro/build/distributions/webKintro.js"></script>
+    <script>
 
-    webKintro.Shared.dispatch(webKintro.Shared.load)
-    webKintro.Shared.observe(observeState)
-  };
-</script>
+      (function() {
+        "use strict";
 
-</body>
+        if (typeof window != "object")
+          return;
+
+        // https://alligator.io/web-components/attributes-properties/
+        
+        const ELEM_APP = 'kintro-app'
+          , ELEM_LIST = 'todos-list'
+          , ELEM_LIST_ITEM = 'todo-item'
+          , TMPL_LIST_ITEM = 'tpl-todo-item'
+        
+        // Helper functions to get DOM elements and templates
+        //
+        function getApp() {
+          return document.querySelector(ELEM_APP)
+        }
+        // function getList() {
+        //   return document.querySelector(ELEM_LIST)
+        // }
+        function getListItemTemplate() {
+          return document.getElementById(TMPL_LIST_ITEM)
+        }
+
+        const App = class extends HTMLElement {
+          static get observedAttributes() {
+            return ['loading'];
+          }
+          // constructor() {
+          //   super()
+          // }
+          attributeChangedCallback(name, previous, next) {
+            switch (name) {
+              case 'loading':
+                console.log(`Value changed from ${previous} to ${next}`);
+                // TODO toggle loader
+              default:
+            }
+          }
+        }
+
+        ,TodosList = class extends HTMLUListElement {
+          connectedCallback() {
+            webKintro.Shared.observe(this.onStateChange)
+            webKintro.Shared.dispatch(webKintro.Shared.load)
+          }
+          onStateChange = (state) => {
+            this.populate(state.todos)
+            getApp().setAttribute('loading', state.loading)
+          }
+          populate(todos) {
+            if (todos.size > 0) {
+             
+
+              todos.toArray().forEach(t => {
+
+
+                // https://javascript.info/slots-composition
+
+                // this.appendChild(new TodoListItem())
+                this.insertAdjacentHTML('beforeEnd', '<li slot="item">Lollipop</li>')
+              
+              })
+            }
+          }
+        }
+
+        ,TodoListItem = class extends HTMLLIElement {
+          constructor() {
+            super()
+            
+            let content = getListItemTemplate().content;
+            // TODO update slot
+            content.appendChild(title)
+              this.appendChild(content.cloneNode(true));
+          }
+        }
+
+        customElements.define(ELEM_APP, App)
+        customElements.define(ELEM_LIST, TodosList, { extends: 'ul' })
+        customElements.define(ELEM_LIST_ITEM, TodoListItem, { extends: 'li' })
+
+        window.onload = function() {
+          
+        }
+      })()
+
+    </script>
+  </body>
 </html>
