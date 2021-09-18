@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kintro - web</title>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+</head>
+<body>
+<div id="root"></div>
+<script src="/Users/zahn/devel/perso/kintro/webKintro/build/distributions/webKintro.js"></script>
+
+<script>
+  window.onload = function () {
+    // webKintro.main()
+    console.log(webKintro)
+
+    function observeState (state) {
+      if (state.loading) return
+      console.log(state.users.toArray())
+      // Array(state.users).map(console.log)
+
+    }
+
+    webKintro.Shared.dispatch(webKintro.Shared.load)
+    webKintro.Shared.observe(observeState)
+  };
+</script>
+
+</body>
+</html>
