@@ -69,6 +69,7 @@ kotlin {
                 with(Deps.Ktor) {
                     implementation(core)
                     implementation(serialization)
+                    implementation(mock)
                 }
 
                 api(Deps.Koin.core)

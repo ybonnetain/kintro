@@ -35,6 +35,7 @@ object Deps {
         const val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val android = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val js = "io.ktor:ktor-client-js:${Versions.ktor}"
+        const val mock = "io.ktor:ktor-client-mock:${Versions.ktor}"
     }
 
     object Koin {
