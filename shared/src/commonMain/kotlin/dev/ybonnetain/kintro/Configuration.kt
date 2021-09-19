@@ -1,6 +1,7 @@
 // GENERATED FILE
 package dev.ybonnetain.kintro
 object Configuration {
-    val host  = "jsonplaceholder.typicode.com"
-    val scheme = "https"
+    val host  = "none"
+    val scheme = "none"
+    val mock = true
 }

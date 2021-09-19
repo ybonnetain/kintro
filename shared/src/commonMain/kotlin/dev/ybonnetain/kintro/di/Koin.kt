@@ -1,6 +1,8 @@
 package dev.ybonnetain.kintro.di
 
 import dev.ybonnetain.kintro.Configuration
+import dev.ybonnetain.kintro.isDebugBuild
+import dev.ybonnetain.kintro.mocks.MockDispatcher
 import dev.ybonnetain.kintro.platformModule
 import dev.ybonnetain.kintro.remote.TodosApi
 import dev.ybonnetain.kintro.remote.UsersApi
@@ -15,6 +17,7 @@ import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -40,7 +43,12 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 
 fun shared() = module {
     single { createJson() }
-    single { createHttpClient(get()) }
+
+    if (Configuration.mock && isDebugBuild()) {
+        single { createHttpMockClient(get()) }
+    } else {
+        single { createHttpClient(get()) }
+    }
 
     single { TodosApi(get()) }
     single { TodosRepository() }
@@ -55,6 +63,22 @@ fun shared() = module {
 // kotlinx-serialization
 
 fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
+
+// HTTP mock client
+//
+
+fun createHttpMockClient(json: Json) = HttpClient(MockEngine) {
+    install(JsonFeature) {
+        serializer = KotlinxSerializer(json)
+    }
+    engine {
+        addHandler { request ->
+            fun handler(content: String, status: HttpStatusCode, headers: Headers) = respond(content, status, headers)
+            MockDispatcher.dispatch(request, ::handler)
+        }
+    }
+}
+
 
 // HTTP client
 // Ktor with android and ios engines configured through the KMM plugin
