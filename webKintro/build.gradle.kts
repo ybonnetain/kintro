@@ -23,7 +23,7 @@ dependencies {
         implementation(coroutinesCore)
     }
 }
-
+// TODO try IR backend
 //kotlin {
 //    js(IR) {
 //        browser()
