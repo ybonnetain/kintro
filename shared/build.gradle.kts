@@ -46,7 +46,7 @@ kotlin {
 
     // TODO: use IR backend ! when using it cannot import common classes in kjs source base
     js {
-//        browser()
+        browser()
         compilations.all {
             kotlinOptions {
                 moduleKind = "commonjs"
@@ -62,7 +62,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 with(Deps.Kotlinx) {
-                    implementation(coroutinesCore)
+                    implementation(coroutinesCore) // TODO use api() for JS app ?
                     implementation(serializationCore)
                 }
 

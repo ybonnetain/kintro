@@ -8,4 +8,5 @@ pluginManagement {
 
 rootProject.name = "kintro"
 include(":androidKintro")
+include(":webKintro")
 include(":shared")

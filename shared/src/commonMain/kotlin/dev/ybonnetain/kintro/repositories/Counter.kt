@@ -1,10 +1,13 @@
 package dev.ybonnetain.kintro.repositories
 
+import kotlinx.coroutines.delay
+
 class Counter() {
 
     var n = 0
 
-    // last fibonacci term in the sequence from 0 to n terms
+    // returns n-th fibonacci term with seed (0,1)
+    //
     fun incrementCounter() : Int {
         n++
         return generateSequence(Pair(0, 1), { Pair(it.second, it.first + it.second) })
@@ -12,5 +15,10 @@ class Counter() {
             .take(n)
             .toList()
             .last()
+    }
+
+    suspend fun tick() : String {
+        delay(5000)
+        return "tack"
     }
 }

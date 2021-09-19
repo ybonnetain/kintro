@@ -1,9 +1,12 @@
 object Versions {
     const val kotlin = "1.5.21"
     const val kotlinCoroutines = "1.5.1-native-mt"
+
     const val koin = "3.1.2"
     const val ktor = "1.6.3"
     const val kotlinxSerialization = "1.2.2"
+    const val kotlinxHtmlJs = "0.7.3"
+
     const val compose = "1.0.2"
     const val accompanist = "0.17.0"
     const val lifecycle = "2.2.0"
@@ -23,6 +26,7 @@ object Deps {
     object Kotlinx {
         const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
         const val serializationCore = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
+        const val htmlJs = "org.jetbrains.kotlinx:kotlinx-html-js:${Versions.kotlinxHtmlJs}"
     }
 
     object Ktor {

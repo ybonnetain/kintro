@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Kintro - web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body class="container">
+
+    <!-- the web app is a tree of custom HTML5 elements with JavaScript controlled lifecycles -->
+    <kintro-app>
+      <app-counter></app-counter>
+      <app-todos>
+        <todos-list></todos-list>
+      </app-todos>
+    </kintro-app>
+
+    <!-- templates are elements that will not be rendered in the DOM but accessible by JavaScript in custom elements -->
+    <template id="app">
+      <style>
+        :host {font: var(--fs-h1) / var(--lh-h1) var(--ff-h1); }
+      </style>
+      <h1>Hello</h1>
+      <h2>Web Components + KMP</h2>
+      <p id="loader"></p>
+      <slot></slot><!-- counter slot -->
+      <slot></slot><!-- todos slot -->
+    </template>
+
+    <template id="counter">
+      <link rel="stylesheet" href="./css/templates/counter.css">
+      <h3>counter</3>
+      <div class="container">
+        <p id="count">0</p>
+        <div class="button" id="btn-increment">
+          <img src="css/assets/count-next.png" width="180" height="180" />
+        </div>
+      </div>
+    </template>
+
+    <template id="todos">
+      <link rel="stylesheet" href="./css/templates/todos.css">
+      <h3>todos</h3>
+      <div class="container">
+        <slot></slot>
+      </div>
+    </template>
+
+    <script src="./build/distributions/webKintro.js"></script>
+    <script>
+
+      (function() {
+        'use strict';
+
+        const shared = webKintro.Shared
+        
+        const ELEM_APP = 'kintro-app'
+        , ELEM_COUNTER = 'app-counter'
+        , ELEM_TODOS = 'app-todos'
+        , ELEM_LIST = 'todos-list'
+        
+        const App = class extends HTMLElement {
+          static get observedAttributes() {
+            return ['loading'];
+          }
+          constructor() {
+            super()
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#app').content.cloneNode(true));
+          }
+          attributeChangedCallback(name, previous, next) {
+            switch (name) {
+              case 'loading':
+                // so it seems attributes are strings anyways :(
+                this.shadowRoot.querySelector('#loader').innerText = (next === 'true' ? 'loading' : '')
+              default:
+            }
+          }
+        }
+
+        ,Counter = class extends HTMLElement {
+          constructor() {
+            super()
+            shared.counter.incrementCounter()
+            shared.tickAsync()
+              .then(console.log)
+              .catch(console.error)
+
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#counter').content.cloneNode(true));
+          }
+          connectedCallback() {
+            this.shadowRoot.querySelector('#btn-increment').addEventListener('click', () => {
+              this.shadowRoot.querySelector('#count').innerText = shared.counter.incrementCounter()
+            })
+          }
+        }
+
+        ,Todos = class extends HTMLElement {
+          constructor() {
+            super()
+            this.attachShadow({ mode: 'open' })
+              .appendChild(document.querySelector('#todos').content.cloneNode(true));
+          }
+        }
+
+        ,List = class extends HTMLElement {
+          constructor() {
+            super()
+            const ul = document.createElement('ul')
+            ul.setAttribute('class', '.list-group-flush')
+            this.appendChild(ul) // in concrete DOM
+          }
+          connectedCallback() {
+            shared.observe(this.onStateChange)
+            shared.dispatch(shared.fetchTodos)
+          }
+          disconnectedCallback() {
+            // TODO: close observer !
+          }
+          onStateChange = (state) => {
+            this.populate(state.todos)           
+            document.querySelector(ELEM_APP).setAttribute('loading', state.loading)
+          }
+          populate(todos) {
+            if (todos.size > 0) {
+              todos.toArray().forEach(todo => {
+                this.children[0].insertAdjacentHTML('afterBegin', `<li class="list-group-item borderless">${todo.title}</li>`)
+              })
+            }
+          }
+        }
+
+        customElements.define(ELEM_APP, App)
+        customElements.define(ELEM_COUNTER, Counter)
+        customElements.define(ELEM_TODOS, Todos)
+        customElements.define(ELEM_LIST, List)
+
+      })()
+
+    </script>
+  </body>
+</html>
