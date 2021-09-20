@@ -2,10 +2,12 @@ object Versions {
     const val kotlin = "1.5.21"
     const val kotlinCoroutines = "1.5.1-native-mt"
 
-    const val koin = "3.1.2"
-    const val ktor = "1.6.3"
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxHtmlJs = "0.7.3"
+
+    const val koin = "3.1.2"
+    const val ktor = "1.6.3"
+    const val kermit = "0.1.9"
 
     const val compose = "1.0.2"
     const val accompanist = "0.17.0"
@@ -17,6 +19,10 @@ object Deps {
         // https://youtrack.jetbrains.com/issue/KT-39833 (1.5.30-M1 + JDK x64) ?
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30" // TODO use Versions when all aligned to 1.5.30
         const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+    }
+
+    object Log {
+        const val kermit = "co.touchlab:kermit:${Versions.kermit}"
     }
 
     object Androidx {

@@ -1,5 +1,6 @@
 package dev.ybonnetain.kintro.di
 
+import co.touchlab.kermit.Kermit
 import dev.ybonnetain.kintro.Configuration
 import dev.ybonnetain.kintro.isDebugBuild
 import dev.ybonnetain.kintro.mocks.MockDispatcher
@@ -25,13 +26,13 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 // Koin init
-// in darwin runtime
+// in darwin / js runtime (no app module)
 
 fun initKoin() = initKoin() {}
 
 // Koin init
-// in android runtime
-// because app module declaration, platformModule is a platform specific container (expect.kt)
+// in android runtime (app module)
+// platformModule is a platform specific module extension (expect)
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
@@ -42,6 +43,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 // Everything we need to inject in the KMM shared module
 
 fun shared() = module {
+    single { Kermit(logger = get()) }
     single { createJson() }
 
     if (Configuration.mock && isDebugBuild()) {

@@ -73,6 +73,7 @@ kotlin {
                 }
 
                 api(Deps.Koin.core)
+                api(Deps.Log.kermit)
             }
         }
         val commonTest by getting {
