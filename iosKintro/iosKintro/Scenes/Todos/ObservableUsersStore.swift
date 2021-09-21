@@ -10,10 +10,10 @@ import SwiftUI
 import Shared
 
 class ObservableUsersStore: ObservableObject {
-    @Published private(set) var state = UsersState(users: [], loading: false)
-    @Published private(set) var sideEffect: UsersSideEffect?
-    
     let store = UsersStore()
+    
+    @Published private(set) var state = UsersStore.Companion().getInitialState()
+    @Published private(set) var sideEffect: UsersSideEffect?
     
     var stateWatcher : Closeable?
     var sideEffectWatcher : Closeable?

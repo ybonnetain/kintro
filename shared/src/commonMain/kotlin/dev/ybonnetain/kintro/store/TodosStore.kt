@@ -13,13 +13,20 @@ import org.koin.core.component.inject
 import dev.ybonnetain.kintro.models.Todo
 import dev.ybonnetain.kintro.repositories.TodosRepository
 
+enum class TodosFilter(val completed: Boolean) {
+    TODO(false),
+    DONE(true)
+}
+
 data class TodosState(
     val todos: List<Todo>,
     val loading: Boolean,
+    val filter: TodosFilter
 ) : RState
 
 sealed class TodosAction : Action {
     object Load : TodosAction()
+    data class Filter(val filter: TodosFilter) : TodosAction()
     data class Data(val todos: List<Todo>) : TodosAction()
     data class Loading(val loading: Boolean) : TodosAction()
     data class Error(val error: Exception) : TodosAction()
@@ -29,12 +36,16 @@ sealed class TodosSideEffect : Effect {
     data class Error(val error: Exception) : TodosSideEffect()
 }
 
+object TodosSelectors {
+    fun filteredTodos(state: TodosState) = state.todos.filter { it.completed == state.filter.completed }
+}
+
 class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
         CoroutineScope by CoroutineScope(Dispatchers.Main),
             KoinComponent
 {
     private val repository: TodosRepository by inject()
-    private val state = MutableStateFlow(TodosState(todos = emptyList(), loading = false))
+    private val state = MutableStateFlow(getInitialState())
     private val sideEffect = MutableSharedFlow<TodosSideEffect>()
 
     override fun observeState(): StateFlow<TodosState> = state
@@ -45,14 +56,17 @@ class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
 
         val nextState = when(action) {
             is TodosAction.Load -> {
-                launch { loadTodos() } // side effect ..
+                launch { loadTodos() }
                 oldState
             }
+            is TodosAction.Filter -> {
+                TodosState(loading = oldState.loading, todos = oldState.todos, filter = action.filter)
+            }
             is TodosAction.Data -> {
-                TodosState(loading = false, todos = action.todos)
+                TodosState(loading = false, todos = action.todos, filter = oldState.filter)
             }
             is TodosAction.Loading -> {
-                TodosState(loading = action.loading, todos = oldState.todos)
+                TodosState(loading = action.loading, todos = oldState.todos, filter = oldState.filter)
             }
             is TodosAction.Error -> {
                 launch { sideEffect.emit(TodosSideEffect.Error(action.error)) }
@@ -74,5 +88,9 @@ class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
         } finally {
             dispatch(TodosAction.Loading(false))
         }
+    }
+
+    companion object {
+        fun getInitialState() = TodosState(todos = emptyList(), loading = false, filter = TodosFilter.TODO)
     }
 }

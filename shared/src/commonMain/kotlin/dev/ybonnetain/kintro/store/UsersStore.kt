@@ -35,7 +35,7 @@ class UsersStore : Store<UsersState, UsersAction, UsersSideEffect>,
         KoinComponent
 {
     private val repository: UsersRepository by inject()
-    private val state = MutableStateFlow(UsersState(users = emptyList(), loading = false))
+    private val state = MutableStateFlow(getInitialState())
     private val sideEffect = MutableSharedFlow<UsersSideEffect>()
 
     override fun observeState(): StateFlow<UsersState> = state
@@ -46,7 +46,7 @@ class UsersStore : Store<UsersState, UsersAction, UsersSideEffect>,
 
         val nextState = when(action) {
             is UsersAction.Load -> {
-                launch { loadUsers() } // side effect ..
+                launch { loadUsers() }
                 oldState
             }
             is UsersAction.Data -> {
@@ -75,5 +75,9 @@ class UsersStore : Store<UsersState, UsersAction, UsersSideEffect>,
         } finally {
             dispatch(UsersAction.Loading(false))
         }
+    }
+
+    companion object {
+        fun getInitialState() = UsersState(users = emptyList(), loading = false)
     }
 }
