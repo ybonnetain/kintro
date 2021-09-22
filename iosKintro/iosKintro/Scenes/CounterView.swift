@@ -84,13 +84,19 @@ struct SumView: View {
                 Button {
                     //
                 } label: {
-                    Label("Previous term", systemImage: "minus")
+                    Label("Some disabled action", systemImage: "questionmark.circle")
                 }.disabled(true)
+                
+                Button {
+                    viewModel.decrement()
+                } label: {
+                    Label("Previous term", systemImage: "gobackward.minus")
+                }
                 
                 Divider()
                 
                 Button(role: .destructive) {
-                    //
+                    viewModel.reset()
                 } label: {
                     Label("Reset", systemImage: "trash")
                 }

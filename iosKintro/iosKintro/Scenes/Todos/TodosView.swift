@@ -14,7 +14,7 @@ struct TodosView: View {
     @EnvironmentObject var store : ObservableTodosStore
     
     @State private var isPresenting : Bool = false
-    @State private var filter = TodosFilter.todo // this is a problem as we may start UI state not in sync with app state
+    @State private var filter = TodosFilter.todo // this is a little bit of a problem as we may start UI state not in sync with app state
     
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct TodosView: View {
                         header: Text(store.state.filter == .todo ? "header_todo" : "header_done"),
                         footer: Text(store.state.filter == .todo ? "footer_todo" : "footer_done")
                     ) {
-                        ForEach(TodosSelectors().filteredTodos(state: store.state), id: \.id) { t in
+                        ForEach(TodosSelector().filteredTodos(state: store.state), id: \.id) { t in
                             TodoListItem(item: t)
                         }
                     }

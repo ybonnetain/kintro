@@ -11,6 +11,7 @@ import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.store.TodosAction
 import dev.ybonnetain.kintro.store.TodosStore
 
+// build: webKintro -> Tasks -> kotlin browser -> browserDistribution
 
 // https://discuss.kotlinlang.org/t/kotlin-js-1-4-how-to-output-a-npm-package/19128
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-export/
@@ -18,7 +19,7 @@ import dev.ybonnetain.kintro.store.TodosStore
 // TODO look at better module export from kotlin code
 // https://kotlinlang.org/docs/js-modules.html#apply-jsmodule-to-packages
 
-// TODO check possible webpack optimisations in dsl
+// TODO webpack optimisations in dsl
 
 object Shared : KoinComponent {
     val mainScope = MainScope()

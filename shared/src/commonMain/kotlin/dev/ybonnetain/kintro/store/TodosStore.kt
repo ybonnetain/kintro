@@ -36,13 +36,13 @@ sealed class TodosSideEffect : Effect {
     data class Error(val error: Exception) : TodosSideEffect()
 }
 
-object TodosSelectors {
+object TodosSelector {
     fun filteredTodos(state: TodosState) = state.todos.filter { it.completed == state.filter.completed }
 }
 
 class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
-        CoroutineScope by CoroutineScope(Dispatchers.Main),
-            KoinComponent
+    CoroutineScope by CoroutineScope(Dispatchers.Main),
+        KoinComponent
 {
     private val repository: TodosRepository by inject()
     private val state = MutableStateFlow(getInitialState())

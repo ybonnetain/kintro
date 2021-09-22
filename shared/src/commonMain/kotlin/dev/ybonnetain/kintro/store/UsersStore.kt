@@ -12,7 +12,6 @@ import org.koin.core.component.inject
 
 import dev.ybonnetain.kintro.models.User
 import dev.ybonnetain.kintro.repositories.UsersRepository
-import kotlin.js.JsName
 
 data class UsersState(
     val users: List<User>,
