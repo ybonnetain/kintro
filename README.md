@@ -17,7 +17,8 @@ brew install openjdk@11
 
 ## Applications
 
-All implement the shared module
+All dependant on the shared module
+<br />Exec `./static/scripts/setenv.sh <prd|mock>` before running apps
 
 * Android -  `Compose` app
 * iOS - `SwiftUI` app

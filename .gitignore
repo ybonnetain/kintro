@@ -10,3 +10,5 @@
 .cxx
 local.properties
 **/Pods
+
+/shared/src/commonMain/kotlin/dev/ybonnetain/kintro/Configuration.kt
