@@ -12,18 +12,19 @@ import Shared
 struct TodosView: View {
     @Environment(\.isPreview) var isPreview
     @EnvironmentObject var store : ObservableTodosStore
+    
     @State private var isPresenting : Bool = false
+    @State private var filter = TodosFilter.todo // this is a little bit of a problem as we may start UI state not in sync with app state
     
     var body: some View {
         NavigationView {
             VStack (alignment: .leading) {
                 List {
                     Section(
-                        header: Text("Yet to be done .."),
-                        footer: Text("La procrastination est une tendance à remettre systématiquement au lendemain des actions. Le « retardataire chronique », appelé procrastinateur, n’arrive pas à se « mettre au travail », surtout lorsque cela ne lui procure pas de satisfaction immédiate.")
-                            .font(.footnote)
+                        header: Text(store.state.filter == .todo ? "header_todo" : "header_done"),
+                        footer: Text(store.state.filter == .todo ? "footer_todo" : "footer_done")
                     ) {
-                        ForEach(store.state.todos, id: \.id) { t in
+                        ForEach(TodosSelector().filteredTodos(state: store.state), id: \.id) { t in
                             TodoListItem(item: t)
                         }
                     }
@@ -45,6 +46,7 @@ struct TodosView: View {
             .navigationTitle("Todos")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarItems(
+                leading: FilterView(filter: $filter),
                 trailing: Button(action: { self.isPresenting.toggle() }) {
                     Text("readme")
                 }
@@ -75,6 +77,21 @@ struct TodoListItem: View {
     }
 }
 
+struct FilterView: View {
+    @EnvironmentObject var store : ObservableTodosStore
+    @Binding var filter: TodosFilter
+    var body: some View {
+        Picker("Status filter", selection: $filter) {
+            Text("Todo").tag(TodosFilter.todo)
+            Text("Done").tag(TodosFilter.done)
+        }
+        .pickerStyle(.segmented)
+        .onChange(of: filter) { value in // ios 14+
+            store.dispatch(TodosAction.Filter(filter: value))
+        }
+    }
+}
+
 struct Readme: View {
     var body: some View {
         VStack {
@@ -99,7 +116,7 @@ struct TodosView_Previews: PreviewProvider {
     static let dummyTodo = Todo(id: 1, userId: 1, title: "dummy todo", completed: false)
     static var previews: some View {
         TodosView()
-            .environmentObject(ObservableTodosStore(withInitialState: TodosState(todos: [dummyTodo], loading: false)))
+            .environmentObject(ObservableTodosStore(withInitialState: TodosState(todos: [dummyTodo], loading: false, filter: TodosFilter.todo)))
         
         ForEach(ColorScheme.allCases, id: \.self) {
             Readme()

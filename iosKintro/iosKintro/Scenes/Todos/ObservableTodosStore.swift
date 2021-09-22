@@ -10,10 +10,10 @@ import SwiftUI
 import Shared
 
 class ObservableTodosStore: ObservableObject {
-    @Published private(set) var state = TodosState(todos: [], loading: false)
-    @Published private(set) var sideEffect: TodosSideEffect?
-    
     let store = TodosStore()
+    
+    @Published private(set) var state = TodosStore.Companion().getInitialState()
+    @Published private(set) var sideEffect: TodosSideEffect?
     
     var stateWatcher : Closeable?
     var sideEffectWatcher : Closeable?

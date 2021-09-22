@@ -10,15 +10,18 @@ import SwiftUI
 import Shared
 
 class CounterViewModel : ObservableObject {
-    @Published var count: Int
-
-    public let repository = Counter()
-
-    init() {
-        self.count = Int(self.repository.incrementCounter())
-    }
+    @Published private(set) var count: Int = 0
+    private let repository = Counter()
 
     func increment() {
         self.count = Int(self.repository.incrementCounter())
+    }
+    
+    func decrement() {
+        self.count = Int(self.repository.decrementCounter())
+    }
+    
+    func reset() {
+        self.count = Int(self.repository.resetCounter())
     }
 }

@@ -1,3 +1,7 @@
 "quack" = "が が !";
 "lorem" = "loremは、ページレイアウトを調整するために設計されたラテン語のランダムな文字列です";
+"footer_todo" = "La procrastination est une tendance à remettre systématiquement au lendemain des actions. Le « retardataire chronique », appelé procrastinateur, n’arrive pas à se « mettre au travail », surtout lorsque cela ne lui procure pas de satisfaction immédiate.";
+"footer_done" = "Bravo c'est fait, ca peut maintenant se faire garbager. Bisous";
+"header_todo" = "Yet to be done";
+"header_done" = "Ca c'est fait";
 
