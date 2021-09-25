@@ -16,6 +16,7 @@
 		8345C22326F47A44008EF088 /* ObservableUsersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345C22226F47A44008EF088 /* ObservableUsersStore.swift */; };
 		836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07626EE87BC009F27E5 /* CounterViewModel.swift */; };
 		836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07A26EE8CE7009F27E5 /* CounterView.swift */; };
+		837A0A4526FF6753000A3CF0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837A0A4426FF6753000A3CF0 /* Card.swift */; };
 		8380155926ECD16A00606C32 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155826ECD16A00606C32 /* ViewModifiers.swift */; };
 		8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8380155D26ECD27000606C32 /* UIColor+Extension.swift */; };
 		83A5E87426F10F4900ADD45A /* UIAppearancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5E87326F10F4900ADD45A /* UIAppearancer.swift */; };
@@ -39,6 +40,7 @@
 		8345C22226F47A44008EF088 /* ObservableUsersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableUsersStore.swift; sourceTree = "<group>"; };
 		836CA07626EE87BC009F27E5 /* CounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewModel.swift; sourceTree = "<group>"; };
 		836CA07A26EE8CE7009F27E5 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		837A0A4426FF6753000A3CF0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8380155826ECD16A00606C32 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		8380155D26ECD27000606C32 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		83A5E87326F10F4900ADD45A /* UIAppearancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppearancer.swift; sourceTree = "<group>"; };
@@ -106,19 +108,28 @@
 				7555FF82242A565900829871 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				8380155B26ECD17100606C32 /* Helpers */,
-				836CA07D26EE942E009F27E5 /* Scenes */,
+				836CA07D26EE942E009F27E5 /* Features */,
+				837A0A4626FF683B000A3CF0 /* Views */,
 			);
 			path = iosKintro;
 			sourceTree = "<group>";
 		};
-		836CA07D26EE942E009F27E5 /* Scenes */ = {
+		836CA07D26EE942E009F27E5 /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				836CA07A26EE8CE7009F27E5 /* CounterView.swift */,
 				836CA07626EE87BC009F27E5 /* CounterViewModel.swift */,
 				83F134F726F3D4D100EA6960 /* Todos */,
 			);
-			path = Scenes;
+			path = Features;
+			sourceTree = "<group>";
+		};
+		837A0A4626FF683B000A3CF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				837A0A4426FF6753000A3CF0 /* Card.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8380155B26ECD17100606C32 /* Helpers */ = {
@@ -269,6 +280,7 @@
 				8380155E26ECD27000606C32 /* UIColor+Extension.swift in Sources */,
 				836CA07726EE87BC009F27E5 /* CounterViewModel.swift in Sources */,
 				8345C22326F47A44008EF088 /* ObservableUsersStore.swift in Sources */,
+				837A0A4526FF6753000A3CF0 /* Card.swift in Sources */,
 				833A750C26EFDDEA003E65BD /* TodosView.swift in Sources */,
 				830BA7AA26F2728F00C41E86 /* Color+Extension.swift in Sources */,
 				836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */,

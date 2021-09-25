@@ -5,7 +5,6 @@
 //  Created by zahn on 11/09/2021.
 //  Copyright © 2021 orgName. All rights reserved.
 //
-
 import SwiftUI
 
 extension View {
@@ -18,6 +17,18 @@ extension View {
     func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
         if condition { transform(self) }
         else { self }
+    }
+    
+    func applyTitleStyle() -> some View {
+        return self.modifier(Title())
+    }
+    
+    func applyNumberStyle() -> some View {
+        return self.modifier(Number())
+    }
+    
+    func applyDescriptionStyle() -> some View {
+        return self.modifier(Description())
     }
 }
 

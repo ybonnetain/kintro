@@ -18,7 +18,7 @@ struct CounterView: View {
                     
                 Text("The counter is basically what comes right after the hello world")
                     .multilineTextAlignment(.center)
-                    .modifier(Description())
+                    .applyDescriptionStyle()
                     .colorInvert()
                     .padding()
 
@@ -64,15 +64,15 @@ struct SumView: View {
             Text("Count")
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .modifier(Title())
+                .applyTitleStyle()
                 .colorInvert()
             Text(String(viewModel.count))
                 .lineLimit(1)
                 .minimumScaleFactor(0.4)
-                .modifier(Number())
+                .applyNumberStyle()
                 .colorInvert()
             Text("thing(s)")
-                .modifier(Description())
+                .applyDescriptionStyle()
                 .colorInvert()
         }
         .modifier(CounterTile())
@@ -116,11 +116,11 @@ struct AddView: View {
         Button(action: { viewModel.increment() }) {
             VStack {
                 Text("Next")
-                    .modifier(Title())
+                    .applyTitleStyle()
                 Image(systemName: "goforward.plus")
-                    .modifier(Number())
+                    .applyNumberStyle()
                 Text("Fibonacci")
-                    .modifier(Description())
+                    .applyDescriptionStyle()
             }
             .modifier(AdderTile())
         }
