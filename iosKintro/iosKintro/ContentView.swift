@@ -60,7 +60,7 @@ struct MainTabbedView: View {
                             .frame(width: 12, height: 12)
                             .offset(x: computeBadgeXOffset(
                                         badgePositionIndex: CGFloat(Tab.allCases.firstIndex(of: t)!),
-                                        width: g.size.width), y: -32)
+                                        width: g.size.width), y: g.size.height - 45)
                     }
                 }
             }
@@ -81,5 +81,14 @@ struct MainTabbedView: View {
         }
 
         return tab == selectedTab ? imageName + ".fill" : imageName
+    }
+}
+
+struct MainTabbedView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainTabbedView()
+            .environmentObject(CounterViewModel())
+            .environmentObject(ObservableTodosStore())
+            .environmentObject(ObservableUsersStore())
     }
 }

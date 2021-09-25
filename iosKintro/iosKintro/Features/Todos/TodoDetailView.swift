@@ -19,16 +19,16 @@ struct TodoDetailView: View {
         ZStack {
             Color.layout
             VStack {
-                TodoDetailTileView(heading: "User") {
+                Card(heading: "User") {
                     Text(self.findUser(id: todo.userId, store: store)?.name ?? "name")
                     Text(self.findUser(id: todo.userId, store: store)?.username ?? "username")
                     Text(self.findUser(id: todo.userId, store: store)?.email ?? "email")
                 }
                 
-                TodoDetailTileView(heading: "Todo") {
+                Card(heading: "Todo") {
                     Text(todo.title)
                         .multilineTextAlignment(.center)
-                        .modifier(Title())
+                        .applyTitleStyle()
                 }
                 
                 Spacer()
@@ -57,28 +57,6 @@ struct TodoDetailView: View {
     
     private func findUser(id: Int32, store: ObservableUsersStore) -> User? {
         return store.state.users.first(where: { $0.id == Int(id) })
-    }
-}
-
-struct TodoDetailTileView<Content: View>: View {
-    var heading : String
-    @ViewBuilder var content: Content
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            Color.white
-            VStack(alignment: .leading) {
-                Text(heading)
-                    .modifier(Description())
-                Divider()
-                content
-                    .foregroundColor(Color.black)
-            }
-            .padding()
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 180) // TODO verify
-        .cornerRadius(16)
-        .padding()
     }
 }
 
