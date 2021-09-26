@@ -26,27 +26,21 @@ object Shared : KoinComponent {
 
     // counter api
     //
-    // this example relates to directly using a kotlin api that was not added
-    // to the dependencies container (this works!)
 
     val counter = Counter()
+    val observeCounter = :: _observeCounter
 
-    // It is currently prohibited to export `extension properties` so fun is written here
-    // We would prefer to write a class extension to get the promise and access it through `counter`
-    // TODO: stay tuned for kotlin 1.6
-    @DelicateCoroutinesApi
-    val tickAsync = :: _tickAsync
-
-    @DelicateCoroutinesApi
-    fun _tickAsync() : Promise<String> = GlobalScope.promise {
-        counter.tick()
+    fun _observeCounter(callback: (count: Int) -> Unit) {
+        mainScope.launch {
+            counter.observeCounter().collect {
+                callback(it)
+            }
+        }
     }
-    //
 
     // store api
     //
     // all `todos` related functionalities in terms of state management, side effect
-    // and memoiized selection are in this api
     // note: is injected with koin in initializer
 
     val store : TodosStore
@@ -57,14 +51,12 @@ object Shared : KoinComponent {
     val fetchTodos = TodosAction.Load
 
     // make the dispatch & observe functions available to js
-    // this way I can avoid to use experimental @JsExport
+    // this way I can avoid using @JsExport
     // which complains about non-exportable super type and properties
     // that being said @JsExport works just fine
 
     val dispatch = :: _dispatch
     val observe = :: _observe
-
-    // these must be exported anyways
 
     fun _dispatch(action: TodosAction) {
         store.dispatch(action)
@@ -75,6 +67,18 @@ object Shared : KoinComponent {
                 callback(it)
             }
         }
+    }
+    //
+
+    // It is currently prohibited to export `extension properties` so fun is written here
+    // We would prefer to write a class extension to get the promise and access it through `counter`
+    // TODO: stay tuned for kotlin 1.6
+    @DelicateCoroutinesApi
+    val tickAsync = :: _tickAsync
+
+    @DelicateCoroutinesApi
+    fun _tickAsync() : Promise<String> = GlobalScope.promise {
+        counter.tick()
     }
     //
 

@@ -83,7 +83,6 @@
         ,Counter = class extends HTMLElement {
           constructor() {
             super()
-            shared.counter.incrementCounter()
             shared.tickAsync()
               .then(console.log)
               .catch(console.error)
@@ -92,9 +91,13 @@
               .appendChild(document.querySelector('#counter').content.cloneNode(true));
           }
           connectedCallback() {
+            shared.observeCounter(this.onCounterUpdate)
             this.shadowRoot.querySelector('#btn-increment').addEventListener('click', () => {
-              this.shadowRoot.querySelector('#count').innerText = shared.counter.incrementCounter()
+              shared.counter.incrementCounter()
             })
+          }
+          onCounterUpdate = (value) => {
+            this.shadowRoot.querySelector('#count').innerText = value
           }
         }
 

@@ -6,6 +6,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+
+import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.store.TodosStore
 import dev.ybonnetain.kintro.store.UsersStore
 
@@ -29,6 +31,8 @@ class CFlow<T: Any> internal constructor(private val origin: Flow<T>) : Flow<T> 
 }
 
 internal fun <T: Any> Flow<T>.wrap(): CFlow<T> = CFlow(this)
+
+fun Counter.watchCount() = observeCounter().wrap()
 
 fun TodosStore.watchState() = observeState().wrap()
 fun TodosStore.watchSideEffect() = observeSideEffect().wrap()

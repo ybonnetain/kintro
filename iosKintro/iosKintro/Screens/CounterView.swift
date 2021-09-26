@@ -57,7 +57,7 @@ struct HeaderView: View {
 }
 
 struct SumView: View {
-    @EnvironmentObject var viewModel: CounterViewModel
+    @EnvironmentObject var viewModel: ObservableCounter
 
     var body: some View {
         VStack {
@@ -110,7 +110,7 @@ struct SumView: View {
 }
 
 struct AddView: View {
-    @EnvironmentObject var viewModel: CounterViewModel
+    @EnvironmentObject var viewModel: ObservableCounter
 
     var body: some View {
         Button(action: { viewModel.increment() }) {
@@ -130,6 +130,6 @@ struct AddView: View {
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView()
-            .environmentObject(CounterViewModel())
+            .environmentObject(ObservableCounter())
     }
 }

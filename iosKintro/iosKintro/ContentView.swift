@@ -2,13 +2,13 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
-    @StateObject var counterViewModel = CounterViewModel()
+    @StateObject var counter = ObservableCounter()
     @StateObject var todosStore = ObservableTodosStore()
     @StateObject var usersStore = ObservableUsersStore()
     
     var body: some View {
         MainTabbedView()
-            .environmentObject(counterViewModel)
+            .environmentObject(counter)
             .environmentObject(todosStore)
             .environmentObject(usersStore)
     }
@@ -87,7 +87,7 @@ struct MainTabbedView: View {
 struct MainTabbedView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabbedView()
-            .environmentObject(CounterViewModel())
+            .environmentObject(ObservableCounter())
             .environmentObject(ObservableTodosStore())
             .environmentObject(ObservableUsersStore())
     }
