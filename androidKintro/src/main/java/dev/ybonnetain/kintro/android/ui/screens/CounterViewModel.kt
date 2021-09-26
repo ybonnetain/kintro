@@ -3,8 +3,9 @@ package dev.ybonnetain.kintro.android.ui.screens
 import androidx.lifecycle.ViewModel
 import dev.ybonnetain.kintro.repositories.Counter
 
-class CounterViewModel() : ViewModel() {
-    private val repository: Counter = Counter()
+class CounterViewModel(private val repository: Counter) : ViewModel() {
 
-    fun increment() : Int = repository.incrementCounter()
+    var observer = repository.observeCounter()
+
+    fun increment() { repository.incrementCounter() }
 }

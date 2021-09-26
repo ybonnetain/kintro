@@ -10,6 +10,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.ybonnetain.kintro.android.helpers.KintroTheme
 
 import dev.ybonnetain.kintro.android.ui.layout.BottomBar
 import dev.ybonnetain.kintro.android.ui.layout.TopBar
@@ -42,10 +43,12 @@ fun MainLayout() {
         )
     }
 
-    Scaffold(
-        topBar = { TopBar() },
-        bottomBar = { BottomBar(navController) }
-    ) {
-        Navigation(navController = navController)
+    KintroTheme {
+        Scaffold(
+            topBar = { TopBar() },
+            bottomBar = { BottomBar(navController) }
+        ) {
+            Navigation(navController = navController)
+        }
     }
 }
