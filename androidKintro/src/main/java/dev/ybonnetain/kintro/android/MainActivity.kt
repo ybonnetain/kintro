@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro.android.ui
+package dev.ybonnetain.kintro.android
 
 import android.os.Bundle
 import android.view.View
@@ -12,8 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.ybonnetain.kintro.android.helpers.KintroTheme
 
-import dev.ybonnetain.kintro.android.ui.layout.BottomBar
-import dev.ybonnetain.kintro.android.ui.layout.TopBar
+import dev.ybonnetain.kintro.android.views.layout.BottomBar
+import dev.ybonnetain.kintro.android.views.layout.TopBar
+import dev.ybonnetain.kintro.android.screens.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

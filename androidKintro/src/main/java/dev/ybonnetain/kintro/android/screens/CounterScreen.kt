@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro.android.ui.screens
+package dev.ybonnetain.kintro.android.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,13 +15,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 import dev.ybonnetain.kintro.android.helpers.ColorPalette
+import dev.ybonnetain.kintro.repositories.Counter
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun CounterScreen() {
-    val viewModel = getViewModel<CounterViewModel>()
+fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
     val count = viewModel.observer.collectAsState()
 
     Column(
@@ -71,8 +71,8 @@ fun CounterCard() {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun CounterScreenPreview() {
-//    CounterScreen()
-//}
+@Preview(showBackground = true)
+@Composable
+fun CounterScreenPreview() {
+    CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+}

@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro.android.ui
+package dev.ybonnetain.kintro.android.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.ybonnetain.kintro.android.ui.screens.CounterScreen
 
 sealed class Screen(val title: String, val route: String) {
     object Counter : Screen("Counter", "counter")
@@ -33,8 +32,6 @@ val navItems = listOf(
         "Todos"
     )
 )
-
-// https://github.com/johncodeos-blog/BottomNavigationBarComposeExample
 
 @Composable
 fun Navigation(navController: NavHostController) {

@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro.android.ui.screens
+package dev.ybonnetain.kintro.android.screens
 
 import androidx.lifecycle.ViewModel
 import dev.ybonnetain.kintro.repositories.Counter

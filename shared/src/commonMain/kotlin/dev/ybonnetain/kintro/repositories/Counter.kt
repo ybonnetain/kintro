@@ -29,16 +29,16 @@ class Counter() {
         calculateTermForPosition(n)
     }
 
+    suspend fun tick() : String {
+        delay(5000)
+        return "tack"
+    }
+
     private fun calculateTermForPosition(n: Int) {
         count.value = generateSequence(seed, { Pair(it.second, it.first + it.second) })
             .map { it.first }
             .take(n)
             .toList()
             .last()
-    }
-
-    suspend fun tick() : String {
-        delay(5000)
-        return "tack"
     }
 }
