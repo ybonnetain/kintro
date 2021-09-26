@@ -9,9 +9,15 @@ object Versions {
     const val ktor = "1.6.3"
     const val kermit = "0.1.9"
 
-    const val compose = "1.0.2"
-    const val accompanist = "0.17.0"
-    const val lifecycle = "2.2.0"
+    const val androidMinSdk = 23
+    const val androidCompileSdk = 31
+    const val androidTargetSdk = androidCompileSdk
+
+    const val lifecycleKtx = "2.4.0-alpha03"
+    const val activityCompose = "1.3.1"
+    const val compose = "1.1.0-alpha04"
+    const val navCompose = "2.4.0-alpha09"
+    const val accompanist = "0.18.0"
 }
 
 object Deps {
@@ -26,7 +32,9 @@ object Deps {
     }
 
     object Androidx {
-        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleKtx}"
+        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleKtx}"
+        const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
     }
 
     object Kotlinx {
@@ -48,5 +56,14 @@ object Deps {
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    }
+
+    object Compose {
+        const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+        const val uiGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
+        const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+        const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
+        const val material = "androidx.compose.material:material:${Versions.compose}"
+        const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     }
 }

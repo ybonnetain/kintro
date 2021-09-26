@@ -7,6 +7,7 @@ import dev.ybonnetain.kintro.mocks.MockDispatcher
 import dev.ybonnetain.kintro.platformModule
 import dev.ybonnetain.kintro.remote.TodosApi
 import dev.ybonnetain.kintro.remote.UsersApi
+import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.repositories.TodosRepository
 import dev.ybonnetain.kintro.repositories.UsersRepository
 import dev.ybonnetain.kintro.store.TodosStore
@@ -51,6 +52,8 @@ fun shared() = module {
     } else {
         single { createHttpClient(get()) }
     }
+
+    single { Counter() }
 
     single { TodosApi(get()) }
     single { TodosRepository() }
