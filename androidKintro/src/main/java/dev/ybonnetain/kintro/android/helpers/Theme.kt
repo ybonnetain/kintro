@@ -40,7 +40,7 @@ val typography = Typography(
 
 object ColorPalette {
     val layout = Color(0xfff2f2f7)
-    val orange = Color(0xffff9501)
+    val orange = Color(0xffffcc00)
     val peach = Color(0xFFFFE5B4)
     val yellow = Color(0xFFFFFF00)
     val darkOrange = Color(0xFFFF9501)

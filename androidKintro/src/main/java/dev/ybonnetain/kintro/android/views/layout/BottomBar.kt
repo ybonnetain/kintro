@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
@@ -17,7 +18,8 @@ import dev.ybonnetain.kintro.android.screens.navItems
 fun BottomBar(navController: NavController) {
     BottomNavigation(
         backgroundColor = ColorPalette.orange,
-        contentColor = Color.White
+        contentColor = Color.White,
+        elevation = 0.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

@@ -1,76 +1,100 @@
 package dev.ybonnetain.kintro.android.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.ybonnetain.kintro.android.R
 
 import dev.ybonnetain.kintro.android.helpers.ColorPalette
 import dev.ybonnetain.kintro.repositories.Counter
 import org.koin.androidx.compose.getViewModel
 
+@ExperimentalMaterialApi
 @Composable
 fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
-    val count = viewModel.observer.collectAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(ColorPalette.orange)
-            .wrapContentSize(Alignment.Center)
+            .wrapContentSize(Alignment.Center),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top // FIXME
     ) {
         Text(
-            text = count.value.toString(),
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = "The counter is basically what comes right after the hello world",
+            fontWeight = FontWeight.W400,
+            color = Color.White,
             textAlign = TextAlign.Center,
-            fontSize = 25.sp
+            fontSize = 16.sp,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(12.dp)
         )
-        Button(onClick = { viewModel.increment() }) {
-            Text(text = "increment counter")
+        Spacer(modifier = Modifier.height(30.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            CounterCard(viewModel)
+            Spacer(modifier = Modifier.width(30.dp))
+            CounterNextCard(viewModel)
         }
-
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            CounterCard()
-            CounterCard()
-        }
-
     }
 }
 
 @Composable
-fun CounterCard() {
+fun CounterCard(viewModel: CounterViewModel) {
+    val count = viewModel.observer.collectAsState()
     Card(
-        elevation = 4.dp,
+        elevation = 0.dp,
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier
-            .background(ColorPalette.darkOrange)
-            .padding(30.dp)
+        backgroundColor = ColorPalette.darkOrange,
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Count", fontWeight = FontWeight.W700)
-            Text("1", fontWeight = FontWeight.Black, fontSize = 40.sp)
-            Text("thing(s)", color = Color.Gray)
+            Text("Count", fontWeight = FontWeight.W700, fontSize = 32.sp)
+            Text(count.value.toString(), fontWeight = FontWeight.Black, fontSize = 40.sp)
+            Text("thing(s)", color = Color.White, fontSize = 20.sp)
         }
     }
 }
 
+@ExperimentalMaterialApi
+@Composable
+fun CounterNextCard(viewModel: CounterViewModel) {
+    Card(
+        elevation = 0.dp,
+        shape = RoundedCornerShape(20.dp),
+        backgroundColor = Color.White,
+        onClick = { viewModel.increment() }
+    ) {
+        Column(
+            modifier = Modifier.padding(30.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("Next", fontWeight = FontWeight.W700, fontSize = 32.sp)
+            Image(painterResource(id = R.drawable.next), contentDescription = null)
+            Text("Fibonacci", fontSize = 20.sp)
+        }
+    }
+}
+
+@ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
 fun CounterScreenPreview() {
