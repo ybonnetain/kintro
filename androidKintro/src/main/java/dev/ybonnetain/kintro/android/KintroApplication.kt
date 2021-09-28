@@ -12,7 +12,7 @@ class KintroApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appContext = this // TODO: use context passed in Koin
+        appContext = this // TODO: use context passed in Koin in platformModule if possible
 
         initKoin() {
             androidContext(this@KintroApplication)

@@ -40,7 +40,7 @@ fun Navigation(navController: NavHostController) {
             CounterScreen()
         }
         composable(Screen.Todos.route) {
-            CounterScreen()
+            TodosScreen()
         }
     }
 }

@@ -8,4 +8,8 @@ class CounterViewModel(private val repository: Counter) : ViewModel() {
     var observer = repository.observeCounter()
 
     fun increment() { repository.incrementCounter() }
+
+    fun decrement() { repository.decrementCounter() }
+
+    fun reset() { repository.resetCounter() }
 }
