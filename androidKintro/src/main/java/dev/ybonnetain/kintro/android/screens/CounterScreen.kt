@@ -13,14 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import dev.ybonnetain.kintro.android.R
 
-import dev.ybonnetain.kintro.android.helpers.ColorPalette
+import dev.ybonnetain.kintro.android.R
+import dev.ybonnetain.kintro.android.helpers.KintroTheme
+import dev.ybonnetain.kintro.android.helpers.typography
 import dev.ybonnetain.kintro.repositories.Counter
 import org.koin.androidx.compose.getViewModel
 
@@ -34,16 +33,15 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(ColorPalette.orange)
+            .background(MaterialTheme.colors.primary)
             .wrapContentSize(Alignment.Center),
     ) {
 
         Text(
             text = "The counter is basically what comes right after the hello world",
-            fontWeight = FontWeight.W400,
-            color = Color.White,
+            style = typography.body2,
+            color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(12.dp)
@@ -60,11 +58,14 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
             CounterNextCard(viewModel)
         }
 
-        Box(modifier = Modifier.padding(40.dp).offset(x = (-25).dp, y = (-80).dp)) {
-            Menu(menuVisible, onToggleMenu = ::toggleMenu, viewModel)
+        Box(modifier = Modifier
+            .padding(40.dp)
+            .offset(x = (-25).dp, y = (-80).dp)) {
+            Menu(menuVisible, toggleMenu = ::toggleMenu, viewModel)
             FloatingActionButton(
                 onClick = { toggleMenu() },
-                backgroundColor = Color.White,
+                backgroundColor = MaterialTheme.colors.surface,
+                contentColor = MaterialTheme.colors.onSurface
             ) {
                 Icon(imageVector = Icons.Default.MoreVert, contentDescription = "counter options")
             }
@@ -80,24 +81,36 @@ fun CounterCard(viewModel: CounterViewModel) {
     Card(
         elevation = 0.dp,
         shape = RoundedCornerShape(20.dp),
-        backgroundColor = ColorPalette.darkOrange,
+        backgroundColor = MaterialTheme.colors.secondary,
     ) {
         Column(
             modifier = Modifier.padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Count", color = Color.White, fontWeight = FontWeight.W700, fontSize = 32.sp)
-            Text(count.value.toString(), color = Color.White, fontWeight = FontWeight.Black, fontSize = 40.sp)
-            Text("thing(s)", color = Color.White, fontSize = 20.sp)
+            Text(
+                text ="Count",
+                style = typography.h2,
+                color = MaterialTheme.colors.onSecondary,
+            )
+            Text(
+                text = count.value.toString(),
+                style = typography.h1,
+                color = MaterialTheme.colors.onSecondary,
+            )
+            Text(
+                text = "thing(s)",
+                style = typography.body1,
+                color = MaterialTheme.colors.onSecondary,
+            )
         }
     }
 }
 
 @Composable
-fun Menu(expanded: Boolean, onToggleMenu: () -> Unit, viewModel: CounterViewModel) {
+fun Menu(expanded: Boolean, toggleMenu: () -> Unit, viewModel: CounterViewModel) {
     DropdownMenu(
         expanded = expanded,
-        onDismissRequest = { onToggleMenu() },
+        onDismissRequest = { toggleMenu() },
         modifier = Modifier.width(200.dp)
     ) {
         DropdownMenuItem(onClick = { /*  */ }, enabled = false) {
@@ -106,7 +119,7 @@ fun Menu(expanded: Boolean, onToggleMenu: () -> Unit, viewModel: CounterViewMode
         DropdownMenuItem(
             onClick = {
                 viewModel.decrement()
-                onToggleMenu()
+                toggleMenu()
             }) {
             Text("Previous term")
         }
@@ -114,7 +127,7 @@ fun Menu(expanded: Boolean, onToggleMenu: () -> Unit, viewModel: CounterViewMode
         DropdownMenuItem(
             onClick = {
                 viewModel.reset()
-                onToggleMenu()
+                toggleMenu()
             }) {
             Text("Reset counter")
         }
@@ -133,9 +146,20 @@ fun CounterNextCard(viewModel: CounterViewModel) {
                 modifier = Modifier.padding(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Next", fontWeight = FontWeight.W700, fontSize = 32.sp)
-                Image(painterResource(id = R.drawable.next), contentDescription = null)
-                Text("Fibonacci", fontSize = 20.sp)
+                Text(
+                    text = "Next",
+                    style = typography.h2,
+                    color = Color.Black
+                )
+                Image(
+                    painterResource(id = R.drawable.next),
+                    contentDescription = null,
+                )
+                Text(
+                    text = "Fibonacci",
+                    style = typography.body1,
+                    color = Color.Black
+                )
             }
         }
     }
@@ -144,5 +168,15 @@ fun CounterNextCard(viewModel: CounterViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun CounterScreenPreview() {
-    CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+    KintroTheme(darkTheme = false) {
+        CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CounterScreenDarkPreview() {
+    KintroTheme(darkTheme = true) {
+        CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+    }
 }

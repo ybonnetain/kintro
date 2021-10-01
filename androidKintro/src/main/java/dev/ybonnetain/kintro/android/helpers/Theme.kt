@@ -1,5 +1,6 @@
 package dev.ybonnetain.kintro.android.helpers
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
@@ -14,8 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.ybonnetain.kintro.android.R
 
-// Typography
-//
 
 private val QuickSand = FontFamily(
     Font(R.font.quicksand_regular),
@@ -26,40 +25,56 @@ val typography = Typography(
     h1 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.Bold,
+        fontSize = 40.sp
+    ),
+    h2 = TextStyle(
+        fontFamily = QuickSand,
+        fontWeight = FontWeight.Bold,
         fontSize = 32.sp
     ),
     body1 = TextStyle(
+        fontFamily = QuickSand,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp
+    ),
+    body2 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     )
 )
 
-// Colors
-//
-
-object ColorPalette {
-    val layout = Color(0xfff2f2f7)
-    val orange = Color(0xffffcc00)
-    val peach = Color(0xFFFFE5B4)
-    val yellow = Color(0xFFFFFF00)
-    val darkOrange = Color(0xFFFF9501)
-}
-
+@SuppressLint("ConflictingOnColor")
 private val DarkColorPalette = darkColors(
-    primary = ColorPalette.orange,
-    primaryVariant = ColorPalette.peach,
-    secondary = ColorPalette.yellow
+    primary = Color.Black,
+    primaryVariant = Color.Black,
+    onPrimary = Color.White,
+    secondary = Gray300,
+    secondaryVariant = Gray300,
+    onSecondary = Gray400,
+    error = Red500,
+    onError = Color.White,
+    background = Color.Black,
+    onBackground = Color.White,
+    surface = Gray300,
+    onSurface = Color.White
 )
 
+@SuppressLint("ConflictingOnColor")
 private val LightColorPalette = lightColors(
-    primary = ColorPalette.orange,
-    primaryVariant = ColorPalette.peach,
-    secondary = ColorPalette.yellow
+    primary = Yellow300,
+    primaryVariant = Yellow500,
+    onPrimary = Color.Black,
+    secondary = Yellow400,
+    secondaryVariant = Yellow300,
+    onSecondary = Color.White,
+    error = Red500,
+    onError = Color.White,
+    background = Gray100,
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black
 )
-
-// Application Theme (from material base)
-//
 
 @Composable
 fun KintroTheme(

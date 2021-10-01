@@ -1,24 +1,22 @@
 package dev.ybonnetain.kintro.android.views.layout
 
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 
-import dev.ybonnetain.kintro.android.helpers.ColorPalette
+import dev.ybonnetain.kintro.android.helpers.KintroTheme
 import dev.ybonnetain.kintro.android.screens.navItems
 
 @Composable
 fun BottomBar(navController: NavController) {
     BottomNavigation(
-        backgroundColor = ColorPalette.orange,
-        contentColor = Color.White,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = 0.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -50,9 +48,20 @@ fun BottomBar(navController: NavController) {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun BottomBarPreview() {
-//    val navController = rememberNavController()
-//    BottomBar(navController = navController)
-//}
+@Preview(showBackground = true)
+@Composable
+fun BottomBarPreview() {
+    KintroTheme(darkTheme = false) {
+        val navController = rememberNavController()
+        BottomBar(navController = navController)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BottomBarDarkPreview() {
+    KintroTheme(darkTheme = true) {
+        val navController = rememberNavController()
+        BottomBar(navController = navController)
+    }
+}
