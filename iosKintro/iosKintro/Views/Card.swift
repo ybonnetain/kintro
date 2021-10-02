@@ -14,12 +14,12 @@ struct Card<Content: View>: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            Color.theme.background
+            Color.theme.surface
             VStack(alignment: .leading) {
-                Text(heading).h2()
+                Text(heading).subtitle1()
                 Divider()
                 content
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.theme.onSurface)
                 Spacer()
             }
             .padding()

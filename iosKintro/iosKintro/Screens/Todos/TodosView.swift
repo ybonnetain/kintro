@@ -27,6 +27,7 @@ struct TodosView: View {
                         ForEach(TodosSelector().filteredTodos(state: store.state), id: \.id) { t in
                             TodoListItem(item: t)
                         }
+                        .listRowBackground(Color.theme.surface)
                     }
                     
                 }
@@ -72,7 +73,7 @@ struct TodoListItem: View {
     var body: some View {
         NavigationLink(destination: TodoDetailView(todo: item)) {
             Text(item.title)
-                .font(.body)
+                .body2()
         }
     }
 }

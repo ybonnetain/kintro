@@ -17,7 +17,7 @@ struct TodoDetailView: View {
     
     var body: some View {
         ZStack {
-            Color.white
+            Color.theme.background
             VStack {
                 Card(heading: "User") {
                     Text(self.findUser(id: todo.userId, store: store)?.name ?? "name")
@@ -65,8 +65,10 @@ struct TodoDetailView_Previews: PreviewProvider {
     static let todo = Todo(id: 1, userId: 1, title: "Mon super todo", completed: false)
     static let user = User(id: 1, name: "jean-michel cornalin", username: "jmco", email: "jmcornalin@test12.dev")
     static var previews: some View {
-        TodoDetailView(todo: todo)
-            .environmentObject(ObservableUsersStore(withInitialState: UsersState(users: [user], loading: false)))
-            .preferredColorScheme(.dark)
+        ForEach(ColorScheme.allCases, id: \.self) {
+            TodoDetailView(todo: todo)
+                .environmentObject(ObservableUsersStore(withInitialState: UsersState(users: [user], loading: false)))
+                .preferredColorScheme($0)
+        }
     }
 }
