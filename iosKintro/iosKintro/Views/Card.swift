@@ -14,10 +14,9 @@ struct Card<Content: View>: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            Color.white
+            Color.theme.background
             VStack(alignment: .leading) {
-                Text(heading)
-                    .applyDescriptionStyle()
+                Text(heading).h2()
                 Divider()
                 content
                     .foregroundColor(Color.black)
@@ -34,7 +33,7 @@ struct Card<Content: View>: View {
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.layout
+            Color.white
             Card(heading: "My title") {
                 Text("line 1")
                 Text("line 2")

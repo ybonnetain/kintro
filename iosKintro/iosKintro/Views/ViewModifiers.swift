@@ -1,63 +1,12 @@
 //
 //  ViewModifiers.swift
-//  iosKintro
+//  ViewModifiers
 //
-//  Created by zahn on 11/09/2021.
+//  Created by zahn on 02/10/2021.
 //  Copyright © 2021 orgName. All rights reserved.
 //
+
 import SwiftUI
-
-extension View {
-
-    // Conditionally chain a view modifier
-    // ex: .if(true) { $0.overlay(Color.yellow) }
-    // where $0 = anonymous param which is our initial view that was chained by `if` modifier
-    //
-    @ViewBuilder
-    func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
-        if condition { transform(self) }
-        else { self }
-    }
-    
-    func applyTitleStyle() -> some View {
-        return self.modifier(Title())
-    }
-    
-    func applyNumberStyle() -> some View {
-        return self.modifier(Number())
-    }
-    
-    func applyDescriptionStyle() -> some View {
-        return self.modifier(Description())
-    }
-}
-
-// Text modifiers
-//
-
-struct Title: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.system(size: 32, weight: .black, design: .rounded))
-            .foregroundColor(Color.black)
-    }
-}
-
-struct Number: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.system(size: 40, weight: .heavy, design: .rounded))
-            .foregroundColor(.black)
-    }
-}
-
-struct Description: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.headline)
-            .foregroundColor(.black)
-    }
-}
 
 // Stack modifiers
 //
@@ -67,7 +16,7 @@ struct CounterTile: ViewModifier {
         content
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100)
             .padding(40)
-            .background(Color.orange)
+            .background(Color.theme.secondary)
             .cornerRadius(16)
     }
 }
@@ -77,7 +26,7 @@ struct AdderTile: ViewModifier {
         content
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100)
             .padding(40)
-            .background(Color.white)
+            .background(Color.theme.surface)
             .cornerRadius(16)
     }
 }

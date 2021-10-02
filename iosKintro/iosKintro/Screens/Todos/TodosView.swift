@@ -36,7 +36,7 @@ struct TodosView: View {
             .if(store.state.loading) {
                 $0.overlay(
                     ZStack {
-                        Color.layout
+                        Color.theme.background
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         ProgressView()
                     }

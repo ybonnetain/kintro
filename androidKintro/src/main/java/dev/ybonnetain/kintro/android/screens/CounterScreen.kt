@@ -18,8 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 import dev.ybonnetain.kintro.android.R
-import dev.ybonnetain.kintro.android.helpers.KintroTheme
-import dev.ybonnetain.kintro.android.helpers.typography
+import dev.ybonnetain.kintro.android.styles.KintroTheme
+import dev.ybonnetain.kintro.android.styles.typography
 import dev.ybonnetain.kintro.repositories.Counter
 import org.koin.androidx.compose.getViewModel
 
@@ -38,8 +38,8 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
     ) {
 
         Text(
-            text = "The counter is basically what comes right after the hello world",
-            style = typography.body2,
+            text = "Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin",
+            style = typography.subtitle2,
             color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -114,14 +114,14 @@ fun Menu(expanded: Boolean, toggleMenu: () -> Unit, viewModel: CounterViewModel)
         modifier = Modifier.width(200.dp)
     ) {
         DropdownMenuItem(onClick = { /*  */ }, enabled = false) {
-            Text("Unavailable action")
+            Text("Unavailable action", style = typography.body2)
         }
         DropdownMenuItem(
             onClick = {
                 viewModel.decrement()
                 toggleMenu()
             }) {
-            Text("Previous term")
+            Text("Previous term", style = typography.body2)
         }
         Divider()
         DropdownMenuItem(
@@ -129,7 +129,7 @@ fun Menu(expanded: Boolean, toggleMenu: () -> Unit, viewModel: CounterViewModel)
                 viewModel.reset()
                 toggleMenu()
             }) {
-            Text("Reset counter")
+            Text("Reset counter", style = typography.body2)
         }
     }
 }

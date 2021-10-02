@@ -12,8 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 import dev.ybonnetain.kintro.android.R
-import dev.ybonnetain.kintro.android.helpers.KintroTheme
-import dev.ybonnetain.kintro.android.helpers.typography
+import dev.ybonnetain.kintro.android.styles.KintroTheme
+import dev.ybonnetain.kintro.android.styles.typography
 
 @Composable
 fun TopBar() {

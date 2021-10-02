@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
-import dev.ybonnetain.kintro.android.helpers.KintroTheme
+import dev.ybonnetain.kintro.android.styles.KintroTheme
 import dev.ybonnetain.kintro.android.screens.navItems
 
 @Composable

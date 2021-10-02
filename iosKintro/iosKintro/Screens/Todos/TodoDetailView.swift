@@ -17,7 +17,7 @@ struct TodoDetailView: View {
     
     var body: some View {
         ZStack {
-            Color.layout
+            Color.white
             VStack {
                 Card(heading: "User") {
                     Text(self.findUser(id: todo.userId, store: store)?.name ?? "name")
@@ -27,8 +27,8 @@ struct TodoDetailView: View {
                 
                 Card(heading: "Todo") {
                     Text(todo.title)
+                        .body1()
                         .multilineTextAlignment(.center)
-                        .applyTitleStyle()
                 }
                 
                 Spacer()
@@ -39,7 +39,7 @@ struct TodoDetailView: View {
         .if(store.state.loading) {
             $0.overlay(
                ZStack {
-                   Color.layout
+                   Color.white
                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                    ProgressView()
                }

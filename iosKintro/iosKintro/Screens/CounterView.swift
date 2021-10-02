@@ -12,14 +12,13 @@ import Shared
 struct CounterView: View {
     var body: some View {
         ZStack {
-            Color.yellow
+            Color.theme.primary
             VStack {
                 HeaderView()
                     
-                Text("The counter is basically what comes right after the hello world")
+                Text("Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin")
+                    .subtitle2()
                     .multilineTextAlignment(.center)
-                    .applyDescriptionStyle()
-                    .colorInvert()
                     .padding()
 
                 HStack(spacing: 16) {
@@ -40,17 +39,12 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Hello")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
-                Text("SwiftUI + KMP")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
+                Text("Hello\nSwiftUI + KMP").h1()
             }
             Spacer()
             Image(systemName: "swift")
                 .font(.system(size: 60))
-                .foregroundColor(Color.orange)
+                .foregroundColor(Color.theme.secondary)
         }
         .padding()
     }
@@ -62,17 +56,17 @@ struct SumView: View {
     var body: some View {
         VStack {
             Text("Count")
+                .h2()
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .applyTitleStyle()
                 .colorInvert()
             Text(String(viewModel.count))
+                .h1()
                 .lineLimit(1)
                 .minimumScaleFactor(0.4)
-                .applyNumberStyle()
                 .colorInvert()
             Text("thing(s)")
-                .applyDescriptionStyle()
+                .body1()
                 .colorInvert()
         }
         .modifier(CounterTile())
@@ -116,11 +110,14 @@ struct AddView: View {
         Button(action: { viewModel.increment() }) {
             VStack {
                 Text("Next")
-                    .applyTitleStyle()
+                    .h2()
+                    .foregroundColor(Color.theme.onSurface)
                 Image(systemName: "goforward.plus")
-                    .applyNumberStyle()
+                    .font(.system(size: 40, weight: .heavy, design: .rounded))
+                    .foregroundColor(Color.theme.onSurface)
                 Text("Fibonacci")
-                    .applyDescriptionStyle()
+                    .body1()
+                    .foregroundColor(Color.theme.onSurface)
             }
             .modifier(AdderTile())
         }

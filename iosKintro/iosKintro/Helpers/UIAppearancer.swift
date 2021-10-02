@@ -21,7 +21,7 @@ func setupUIKit() {
     let appearance = UINavigationBarAppearance()
     appearance.largeTitleTextAttributes = attrs
     appearance.shadowColor = .clear
-    appearance.backgroundColor = UIColor(hex: 0xf2f2f7)
+//    appearance.backgroundColor = UIColor(hex: 0xf2f2f7)
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
     // UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default) // transparent
     

@@ -10,8 +10,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.ybonnetain.kintro.android.helpers.KintroTheme
 
+import dev.ybonnetain.kintro.android.styles.KintroTheme
 import dev.ybonnetain.kintro.android.views.layout.BottomBar
 import dev.ybonnetain.kintro.android.views.layout.TopBar
 import dev.ybonnetain.kintro.android.screens.Navigation

@@ -1,4 +1,4 @@
-package dev.ybonnetain.kintro.android.helpers
+package dev.ybonnetain.kintro.android.styles
 
 import androidx.compose.ui.graphics.Color
 
