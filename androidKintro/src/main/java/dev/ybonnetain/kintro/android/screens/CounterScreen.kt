@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 
 import dev.ybonnetain.kintro.android.R
 import dev.ybonnetain.kintro.android.styles.KintroTheme
+import dev.ybonnetain.kintro.android.styles.Scale
 import dev.ybonnetain.kintro.android.styles.typography
 import dev.ybonnetain.kintro.repositories.Counter
 import org.koin.androidx.compose.getViewModel
@@ -33,33 +34,33 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.primary)
+            .background(MaterialTheme.colors.background)
             .wrapContentSize(Alignment.Center),
     ) {
 
         Text(
             text = "Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin",
             style = typography.subtitle2,
-            color = MaterialTheme.colors.onPrimary,
+            color = MaterialTheme.colors.onBackground,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(12.dp)
+                .padding(Scale.base)
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(Scale.plus1))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             CounterCard(viewModel)
-            Spacer(modifier = Modifier.width(30.dp))
+            Spacer(modifier = Modifier.width(Scale.plus1))
             CounterNextCard(viewModel)
         }
 
         Box(modifier = Modifier
-            .padding(40.dp)
+            .padding(Scale.plus2)
             .offset(x = (-25).dp, y = (-80).dp)) {
             Menu(menuVisible, toggleMenu = ::toggleMenu, viewModel)
             FloatingActionButton(
@@ -80,27 +81,27 @@ fun CounterCard(viewModel: CounterViewModel) {
 
     Card(
         elevation = 0.dp,
-        shape = RoundedCornerShape(20.dp),
-        backgroundColor = MaterialTheme.colors.secondary,
+        shape = RoundedCornerShape(Scale.base),
+        backgroundColor = MaterialTheme.colors.primary,
     ) {
         Column(
-            modifier = Modifier.padding(30.dp),
+            modifier = Modifier.padding(Scale.plus1),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text ="Count",
                 style = typography.h2,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colors.onPrimary,
             )
             Text(
                 text = count.value.toString(),
                 style = typography.h1,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colors.onPrimary,
             )
             Text(
                 text = "thing(s)",
                 style = typography.body1,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colors.onPrimary,
             )
         }
     }
@@ -138,12 +139,12 @@ fun Menu(expanded: Boolean, toggleMenu: () -> Unit, viewModel: CounterViewModel)
 fun CounterNextCard(viewModel: CounterViewModel) {
     Card(
         elevation = 0.dp,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Scale.base),
         backgroundColor = Color.White,
     ) {
         Box(modifier = Modifier.clickable { viewModel.increment() }) {
             Column(
-                modifier = Modifier.padding(30.dp),
+                modifier = Modifier.padding(Scale.plus1),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(

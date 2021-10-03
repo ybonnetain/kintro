@@ -18,8 +18,8 @@ import dev.ybonnetain.kintro.android.styles.typography
 @Composable
 fun TopBar() {
     TopAppBar(
-        backgroundColor = MaterialTheme.colors.primary,
-        contentColor = MaterialTheme.colors.onPrimary,
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.onBackground,
         elevation = 0.dp,
         modifier = Modifier.heightIn(min = 150.dp, max = 150.dp), // TODO wrap content ?
         title = {

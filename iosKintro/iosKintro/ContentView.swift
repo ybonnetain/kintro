@@ -56,7 +56,7 @@ struct MainTabbedView: View {
                 .tag(Tab.todos)
 
             }
-            .accentColor(.orange) /// TabView
+            .accentColor(Color.theme.primary) /// TabView
 
             ZStack {
                 ForEach(Tab.allCases) { t in

@@ -1,5 +1,7 @@
 //
 //  Color+Extension.swift
+//  iosKintro
+//  https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
 //
 //  Created by zahn on 15/09/2021.
 //  Copyright © 2021 orgName. All rights reserved.

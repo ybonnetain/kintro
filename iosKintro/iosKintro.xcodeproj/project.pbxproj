@@ -21,6 +21,7 @@
 		833BC95D2708799B00D1DA10 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 833BC9592708799B00D1DA10 /* Inter-Light.ttf */; };
 		833BC95E2708799B00D1DA10 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 833BC95A2708799B00D1DA10 /* Inter-Regular.ttf */; };
 		8345C22326F47A44008EF088 /* ObservableUsersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345C22226F47A44008EF088 /* ObservableUsersStore.swift */; };
+		834A943027099F350025EF2E /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834A942F27099F350025EF2E /* Scale.swift */; };
 		836CA07726EE87BC009F27E5 /* ObservableCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07626EE87BC009F27E5 /* ObservableCounter.swift */; };
 		836CA07B26EE8CE7009F27E5 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CA07A26EE8CE7009F27E5 /* CounterView.swift */; };
 		837A0A4526FF6753000A3CF0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837A0A4426FF6753000A3CF0 /* Card.swift */; };
@@ -51,6 +52,7 @@
 		833BC9592708799B00D1DA10 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
 		833BC95A2708799B00D1DA10 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		8345C22226F47A44008EF088 /* ObservableUsersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableUsersStore.swift; sourceTree = "<group>"; };
+		834A942F27099F350025EF2E /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		836CA07626EE87BC009F27E5 /* ObservableCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableCounter.swift; sourceTree = "<group>"; };
 		836CA07A26EE8CE7009F27E5 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		837A0A4426FF6753000A3CF0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				830BA7A926F2728F00C41E86 /* Color+Extension.swift */,
 				8305EF46270888ED0084C42E /* Text+Extension.swift */,
+				834A942F27099F350025EF2E /* Scale.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834A943027099F350025EF2E /* Scale.swift in Sources */,
 				8380155926ECD16A00606C32 /* View+Extension.swift in Sources */,
 				83A5E87426F10F4900ADD45A /* UIAppearancer.swift in Sources */,
 				830BA7B326F29DCB00C41E86 /* EnvironmentValues+Extension.swift in Sources */,

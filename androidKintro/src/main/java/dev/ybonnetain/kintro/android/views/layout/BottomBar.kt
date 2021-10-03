@@ -15,8 +15,8 @@ import dev.ybonnetain.kintro.android.screens.navItems
 @Composable
 fun BottomBar(navController: NavController) {
     BottomNavigation(
-        backgroundColor = MaterialTheme.colors.primary,
-        contentColor = MaterialTheme.colors.onPrimary,
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.onBackground,
         elevation = 0.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

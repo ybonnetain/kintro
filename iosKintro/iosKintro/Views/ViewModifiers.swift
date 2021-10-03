@@ -16,7 +16,7 @@ struct CounterTile: ViewModifier {
         content
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100)
             .padding(40)
-            .background(Color.theme.secondary)
+            .background(Color.theme.primary)
             .cornerRadius(16)
     }
 }

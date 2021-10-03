@@ -25,7 +25,7 @@ struct Card<Content: View>: View {
             .padding()
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 180)
-        .cornerRadius(16)
+        .cornerRadius(Scale.base)
         .padding()
     }
 }

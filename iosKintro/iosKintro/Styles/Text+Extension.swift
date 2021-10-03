@@ -30,7 +30,7 @@ extension Text {
     
     func subtitle2() -> Text {
         self
-            .font(.custom("Inter-Regular", size: 24))
+            .font(.custom("Inter-Regular", size: 18))
             .fontWeight(.regular)
     }
     

@@ -12,16 +12,16 @@ import Shared
 struct CounterView: View {
     var body: some View {
         ZStack {
-            Color.theme.primary
+            Color.theme.background
             VStack {
                 HeaderView()
                     
                 Text("Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin")
                     .subtitle2()
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .padding(Scale.base)
 
-                HStack(spacing: 16) {
+                HStack(spacing: Scale.base) {
                     SumView()
                     AddView()
                 }
@@ -29,7 +29,7 @@ struct CounterView: View {
 
                 Spacer()
             }
-            .padding(.top, 40)
+            .padding(.top, Scale.plus2)
         }
         .modifier(IgnoredSafeAreaModifier())
     }
@@ -43,8 +43,8 @@ struct HeaderView: View {
             }
             Spacer()
             Image(systemName: "swift")
-                .font(.system(size: 60))
-                .foregroundColor(Color.theme.secondary)
+                .font(.system(size: Scale.plus3))
+                .foregroundColor(Color.theme.primary)
         }
         .padding()
     }
@@ -57,21 +57,21 @@ struct SumView: View {
         VStack {
             Text("Count")
                 .h2()
+                .foregroundColor(Color.theme.onPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .colorInvert()
             Text(String(viewModel.count))
                 .h1()
+                .foregroundColor(Color.theme.onPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.4)
-                .colorInvert()
             Text("thing(s)")
                 .body1()
-                .colorInvert()
+                .foregroundColor(Color.theme.onPrimary)
         }
         .modifier(CounterTile())
         
-        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: Scale.base, style: .continuous))
         .contextMenu {
             
             if #available(iOS 15.0, *) {
@@ -113,7 +113,7 @@ struct AddView: View {
                     .h2()
                     .foregroundColor(Color.theme.onSurface)
                 Image(systemName: "goforward.plus")
-                    .font(.system(size: 40, weight: .heavy, design: .rounded))
+                    .font(.system(size: Scale.plus1, weight: .heavy, design: .rounded))
                     .foregroundColor(Color.theme.onSurface)
                 Text("Fibonacci")
                     .body1()
