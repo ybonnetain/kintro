@@ -1,44 +1,57 @@
 package dev.ybonnetain.kintro.repositories
 
-import kotlinx.coroutines.delay
+import dev.ybonnetain.kintro.LocalStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class Counter() {
+interface ICounter {
+    fun observeCounter() : StateFlow<Int>
+    fun incrementCounter()
+    fun decrementCounter()
+    fun resetCounter()
+}
 
-    fun observeCounter(): StateFlow<Int> = count
+class Counter() : KoinComponent, ICounter {
+
+    override fun observeCounter(): StateFlow<Int> = count
 
     // n = term position in fibonacci serie
     // we start with 1st term for seed = (0,1) which is 0
     //
-    private var n = 1
+    private val storage: LocalStorage by inject()
+    private var n = storage.retrieve(PERSISTENCE_KEY, "1").toInt()
     private val seed = Pair(0, 1)
-    private val count = MutableStateFlow(0)
+    private val count = MutableStateFlow(fibonacciValueForTerm(n))
 
-    fun incrementCounter() {
-        calculateTermForPosition(++n)
+    override fun incrementCounter() {
+        move(++n)
     }
 
-    fun decrementCounter() {
+    override fun decrementCounter() {
         if (n > 1) n--
-        calculateTermForPosition(n)
+        move(n)
     }
 
-    fun resetCounter() {
+    override fun resetCounter() {
         n = 1
-        calculateTermForPosition(n)
+        move(n)
     }
 
-    suspend fun tick() : String {
-        delay(5000)
-        return "tack"
+    private fun move(n: Int) {
+        storage.persist(PERSISTENCE_KEY, n.toString())
+        count.value = fibonacciValueForTerm(n)
     }
 
-    private fun calculateTermForPosition(n: Int) {
-        count.value = generateSequence(seed, { Pair(it.second, it.first + it.second) })
+    private fun fibonacciValueForTerm(n: Int) = generateSequence(
+        seed, { Pair(it.second, it.first + it.second) })
             .map { it.first }
             .take(n)
             .toList()
             .last()
+
+    companion object {
+        const val PERSISTENCE_KEY = "counter_internal_term"
     }
 }

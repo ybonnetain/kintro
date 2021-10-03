@@ -15,4 +15,3 @@ actual fun isDebugBuild() : Boolean = BuildConfig.DEBUG
 actual fun platformModule() = module {
     single<Logger> { LogcatLogger() }
 }
-

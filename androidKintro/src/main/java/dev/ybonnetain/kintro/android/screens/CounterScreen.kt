@@ -21,7 +21,7 @@ import dev.ybonnetain.kintro.android.R
 import dev.ybonnetain.kintro.android.styles.KintroTheme
 import dev.ybonnetain.kintro.android.styles.Scale
 import dev.ybonnetain.kintro.android.styles.typography
-import dev.ybonnetain.kintro.repositories.Counter
+
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -170,7 +170,7 @@ fun CounterNextCard(viewModel: CounterViewModel) {
 @Composable
 fun CounterScreenPreview() {
     KintroTheme(darkTheme = false) {
-        CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+        CounterScreen(viewModel = CounterViewModel(CounterMock()))
     }
 }
 
@@ -178,6 +178,6 @@ fun CounterScreenPreview() {
 @Composable
 fun CounterScreenDarkPreview() {
     KintroTheme(darkTheme = true) {
-        CounterScreen(viewModel = CounterViewModel(repository = Counter()))
+        CounterScreen(viewModel = CounterViewModel(CounterMock()))
     }
 }
