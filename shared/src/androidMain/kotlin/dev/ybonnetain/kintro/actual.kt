@@ -1,12 +1,13 @@
 package dev.ybonnetain.kintro
 
-import android.content.Context
 import co.touchlab.kermit.LogcatLogger
 import co.touchlab.kermit.Logger
 import org.koin.dsl.module
 
-// TODO [android] use koin container to get app context instead (see MainApplication to replace)
-lateinit var appContext: Context
+// I get android context with Koin (see Android's KintroApplication)
+// If a context is needed outside of the platform module there something possible
+// here -> lateinit var appContext: Context
+// android application's onCreate -> appContext = this
 
 actual fun getPlatform() = "android"
 

@@ -1,5 +1,6 @@
 package dev.ybonnetain.kintro.android.screens
 
+import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.CheckCircle

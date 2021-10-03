@@ -12,8 +12,7 @@ import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.repositories.ICounter
 import dev.ybonnetain.kintro.repositories.TodosRepository
 import dev.ybonnetain.kintro.repositories.UsersRepository
-import dev.ybonnetain.kintro.store.TodosStore
-import dev.ybonnetain.kintro.store.UsersStore
+import dev.ybonnetain.kintro.store.*
 import kotlinx.serialization.json.Json
 
 import org.koin.core.context.startKoin
@@ -60,7 +59,7 @@ fun shared() = module {
 
     single { TodosApi(get()) }
     single { TodosRepository() }
-    single { TodosStore() }
+    single<Store<TodosState, TodosAction, TodosSideEffect>> { TodosStore() }
 
     single { UsersApi(get()) }
     single { UsersRepository() }

@@ -1,5 +1,6 @@
 package dev.ybonnetain.kintro.store
 
+import co.touchlab.kermit.Kermit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -44,16 +45,21 @@ class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
     CoroutineScope by CoroutineScope(Dispatchers.Main),
         KoinComponent
 {
+private val logger: Kermit by inject()
     private val repository: TodosRepository by inject()
     private val state = MutableStateFlow(getInitialState())
     private val sideEffect = MutableSharedFlow<TodosSideEffect>()
+
+init {
+    logger.d { "coucou: todos store init" }
+}
 
     override fun observeState(): StateFlow<TodosState> = state
     override fun observeSideEffect(): Flow<TodosSideEffect> = sideEffect
 
     override fun dispatch(action: TodosAction) {
         val oldState = state.value
-
+logger.d { "coucou: dispatch $action" }
         val nextState = when(action) {
             is TodosAction.Load -> {
                 launch { loadTodos() }

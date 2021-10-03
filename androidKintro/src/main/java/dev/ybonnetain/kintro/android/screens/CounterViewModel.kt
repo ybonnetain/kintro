@@ -5,7 +5,9 @@ import dev.ybonnetain.kintro.repositories.ICounter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-// Interface enable usage of repository mock in previews
+// Interface enables usage of repository mock in previews
+// Passing a mock object serves the purpose of supporting view models in previews
+// without initializing full Koin context
 //
 class CounterMock : ICounter {
     override fun observeCounter() : StateFlow<Int> = MutableStateFlow(0)
