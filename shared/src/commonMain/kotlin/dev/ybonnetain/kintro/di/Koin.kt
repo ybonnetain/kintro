@@ -2,16 +2,17 @@ package dev.ybonnetain.kintro.di
 
 import co.touchlab.kermit.Kermit
 import dev.ybonnetain.kintro.Configuration
+import dev.ybonnetain.kintro.LocalStorage
 import dev.ybonnetain.kintro.isDebugBuild
 import dev.ybonnetain.kintro.mocks.MockDispatcher
 import dev.ybonnetain.kintro.platformModule
 import dev.ybonnetain.kintro.remote.TodosApi
 import dev.ybonnetain.kintro.remote.UsersApi
 import dev.ybonnetain.kintro.repositories.Counter
+import dev.ybonnetain.kintro.repositories.ICounter
 import dev.ybonnetain.kintro.repositories.TodosRepository
 import dev.ybonnetain.kintro.repositories.UsersRepository
-import dev.ybonnetain.kintro.store.TodosStore
-import dev.ybonnetain.kintro.store.UsersStore
+import dev.ybonnetain.kintro.store.*
 import kotlinx.serialization.json.Json
 
 import org.koin.core.context.startKoin
@@ -45,6 +46,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 
 fun shared() = module {
     single { Kermit(logger = get()) }
+    single { LocalStorage() }
     single { createJson() }
 
     if (Configuration.mock && isDebugBuild()) {
@@ -53,11 +55,11 @@ fun shared() = module {
         single { createHttpClient(get()) }
     }
 
-    single { Counter() }
+    single<ICounter> { Counter() }
 
     single { TodosApi(get()) }
     single { TodosRepository() }
-    single { TodosStore() }
+    single<Store<TodosState, TodosAction, TodosSideEffect>> { TodosStore() }
 
     single { UsersApi(get()) }
     single { UsersRepository() }

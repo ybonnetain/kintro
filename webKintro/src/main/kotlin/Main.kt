@@ -19,6 +19,8 @@ import dev.ybonnetain.kintro.store.TodosStore
 // TODO look at better module export from kotlin code
 // https://kotlinlang.org/docs/js-modules.html#apply-jsmodule-to-packages
 
+// https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d
+
 // TODO webpack optimisations in dsl
 
 object Shared : KoinComponent {
@@ -71,14 +73,19 @@ object Shared : KoinComponent {
     //
 
     // It is currently prohibited to export `extension properties` so fun is written here
-    // We would prefer to write a class extension to get the promise and access it through `counter`
+    // We would prefer to write a class extension to get the promise
     // TODO: stay tuned for kotlin 1.6
+    private suspend fun tick() : String {
+        delay(5000)
+        return "tack"
+    }
+
     @DelicateCoroutinesApi
     val tickAsync = :: _tickAsync
 
     @DelicateCoroutinesApi
     fun _tickAsync() : Promise<String> = GlobalScope.promise {
-        counter.tick()
+        tick()
     }
     //
 

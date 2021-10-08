@@ -12,17 +12,16 @@ import Shared
 struct CounterView: View {
     var body: some View {
         ZStack {
-            Color.yellow
+            Color.theme.background
             VStack {
                 HeaderView()
                     
-                Text("The counter is basically what comes right after the hello world")
+                Text("Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin")
+                    .subtitle2()
                     .multilineTextAlignment(.center)
-                    .applyDescriptionStyle()
-                    .colorInvert()
-                    .padding()
+                    .padding(Scale.base)
 
-                HStack(spacing: 16) {
+                HStack(spacing: Scale.base) {
                     SumView()
                     AddView()
                 }
@@ -30,7 +29,7 @@ struct CounterView: View {
 
                 Spacer()
             }
-            .padding(.top, 40)
+            .padding(.top, Scale.plus2)
         }
         .modifier(IgnoredSafeAreaModifier())
     }
@@ -40,17 +39,12 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Hello")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
-                Text("SwiftUI + KMP")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
+                Text("Hello\nSwiftUI + KMP").h1()
             }
             Spacer()
             Image(systemName: "swift")
-                .font(.system(size: 60))
-                .foregroundColor(Color.orange)
+                .font(.system(size: Scale.plus3))
+                .foregroundColor(Color.theme.primary)
         }
         .padding()
     }
@@ -62,22 +56,22 @@ struct SumView: View {
     var body: some View {
         VStack {
             Text("Count")
+                .h2()
+                .foregroundColor(Color.theme.onPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .applyTitleStyle()
-                .colorInvert()
             Text(String(viewModel.count))
+                .h1()
+                .foregroundColor(Color.theme.onPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.4)
-                .applyNumberStyle()
-                .colorInvert()
             Text("thing(s)")
-                .applyDescriptionStyle()
-                .colorInvert()
+                .body1()
+                .foregroundColor(Color.theme.onPrimary)
         }
         .modifier(CounterTile())
         
-        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: Scale.base, style: .continuous))
         .contextMenu {
             
             if #available(iOS 15.0, *) {
@@ -116,11 +110,14 @@ struct AddView: View {
         Button(action: { viewModel.increment() }) {
             VStack {
                 Text("Next")
-                    .applyTitleStyle()
+                    .h2()
+                    .foregroundColor(Color.theme.onSurface)
                 Image(systemName: "goforward.plus")
-                    .applyNumberStyle()
+                    .font(.system(size: Scale.plus1, weight: .heavy, design: .rounded))
+                    .foregroundColor(Color.theme.onSurface)
                 Text("Fibonacci")
-                    .applyDescriptionStyle()
+                    .body1()
+                    .foregroundColor(Color.theme.onSurface)
             }
             .modifier(AdderTile())
         }

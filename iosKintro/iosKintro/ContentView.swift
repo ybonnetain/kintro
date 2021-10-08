@@ -6,11 +6,17 @@ struct ContentView: View {
     @StateObject var todosStore = ObservableTodosStore()
     @StateObject var usersStore = ObservableUsersStore()
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         MainTabbedView()
             .environmentObject(counter)
             .environmentObject(todosStore)
             .environmentObject(usersStore)
+        
+            .onChange(of: colorScheme, perform: { color in
+                setupUIKit(scheme: color)
+            })
     }
 }
 
@@ -50,7 +56,7 @@ struct MainTabbedView: View {
                 .tag(Tab.todos)
 
             }
-            .accentColor(.orange) /// TabView
+            .accentColor(Color.theme.primary) /// TabView
 
             ZStack {
                 ForEach(Tab.allCases) { t in

@@ -2,7 +2,7 @@
 //  UIColor+Extension.swift
 //  iosKintro
 //
-//  Created by zahn on 11/09/2021.
+//  Created by zahn on 02/10/2021.
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
@@ -28,4 +28,3 @@ extension UIColor {
         self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff)
     }
 }
-

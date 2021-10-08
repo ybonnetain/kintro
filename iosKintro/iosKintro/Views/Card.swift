@@ -14,19 +14,18 @@ struct Card<Content: View>: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            Color.white
+            Color.theme.surface
             VStack(alignment: .leading) {
-                Text(heading)
-                    .applyDescriptionStyle()
+                Text(heading).subtitle1()
                 Divider()
                 content
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.theme.onSurface)
                 Spacer()
             }
             .padding()
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 180)
-        .cornerRadius(16)
+        .cornerRadius(Scale.base)
         .padding()
     }
 }
@@ -34,7 +33,7 @@ struct Card<Content: View>: View {
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.layout
+            Color.white
             Card(heading: "My title") {
                 Text("line 1")
                 Text("line 2")

@@ -27,6 +27,7 @@ struct TodosView: View {
                         ForEach(TodosSelector().filteredTodos(state: store.state), id: \.id) { t in
                             TodoListItem(item: t)
                         }
+                        .listRowBackground(Color.theme.surface)
                     }
                     
                 }
@@ -36,7 +37,7 @@ struct TodosView: View {
             .if(store.state.loading) {
                 $0.overlay(
                     ZStack {
-                        Color.layout
+                        Color.theme.background
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         ProgressView()
                     }
@@ -48,7 +49,7 @@ struct TodosView: View {
             .navigationBarItems(
                 leading: FilterView(filter: $filter),
                 trailing: Button(action: { self.isPresenting.toggle() }) {
-                    Text("readme")
+                    Text("readme").subtitle2()
                 }
             )
         }
@@ -72,7 +73,6 @@ struct TodoListItem: View {
     var body: some View {
         NavigationLink(destination: TodoDetailView(todo: item)) {
             Text(item.title)
-                .font(.body)
         }
     }
 }
@@ -82,8 +82,8 @@ struct FilterView: View {
     @Binding var filter: TodosFilter
     var body: some View {
         Picker("Status filter", selection: $filter) {
-            Text("Todo").tag(TodosFilter.todo)
-            Text("Done").tag(TodosFilter.done)
+            Text("Todo").body1().tag(TodosFilter.todo)
+            Text("Done").body1().tag(TodosFilter.done)
         }
         .pickerStyle(.segmented)
         .onChange(of: filter) { value in // ios 14+
@@ -102,12 +102,12 @@ struct Readme: View {
                 .padding(60)
             Text("quack")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 32, weight: .black, design: .rounded))
+                .font(.system(size: Scale.plus1, weight: .black, design: .rounded))
                 .padding()
             Text("lorem")
                 .multilineTextAlignment(.center)
                 .font(.callout)
-                .padding(40)
+                .padding(Scale.plus1)
         }
     }
 }
