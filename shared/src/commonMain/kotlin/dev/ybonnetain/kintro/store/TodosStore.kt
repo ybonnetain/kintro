@@ -50,16 +50,11 @@ private val logger: Kermit by inject()
     private val state = MutableStateFlow(getInitialState())
     private val sideEffect = MutableSharedFlow<TodosSideEffect>()
 
-init {
-    logger.d { "coucou: todos store init" }
-}
-
     override fun observeState(): StateFlow<TodosState> = state
     override fun observeSideEffect(): Flow<TodosSideEffect> = sideEffect
 
     override fun dispatch(action: TodosAction) {
         val oldState = state.value
-logger.d { "coucou: dispatch $action" }
         val nextState = when(action) {
             is TodosAction.Load -> {
                 launch { loadTodos() }
