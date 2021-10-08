@@ -20,17 +20,16 @@ extension View {
     }
     
     // Conditionally chain the refreshable modifier
-    // Only from iOS 15
+    // api not available before iOS 15
     //
     @ViewBuilder
-    func refresh<Transform: View>(action: @escaping () -> Void, transform: (Self) -> Transform) -> some View {
+    func refresh(action: @escaping () -> Void) -> some View {
         if #available(iOS 15.0, *) {
-            transform(self)
+            self
                 .refreshable {
                     action()
                 }
         } else {
-            // api not available before iOS 15
             self
         }
     }

@@ -44,10 +44,8 @@ struct TodosView: View {
                 )
             }
                         
-            // iOS 15 conditionned view extension for refreshable
             .refresh(action: {
-                // refreshable is designed for async/await
-                // therefor it will auto-set to a background context
+                // refreshable auto-sets to a background context
                 // however our store was created from main and
                 // calling it from a global background context will result in a
                 // `kotlin.native.IncorrectDereferenceException` unless we explicitly
@@ -55,9 +53,7 @@ struct TodosView: View {
                 DispatchQueue.main.async {
                     store.dispatch(TodosAction.Load())
                 }
-            }) {
-                $0
-            }
+            })
 
             .navigationTitle("Todos")
             .navigationBarTitleDisplayMode(.large)
