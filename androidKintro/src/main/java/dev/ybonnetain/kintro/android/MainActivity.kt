@@ -46,10 +46,10 @@ fun MainLayout() {
 
     KintroTheme {
         Scaffold(
-            topBar = { TopBar() },
+            // globally applied TopBar would be there ..
             bottomBar = { BottomBar(navController) }
         ) {
-            Navigation(navController = navController)
+            Navigation(navController)
         }
     }
 }

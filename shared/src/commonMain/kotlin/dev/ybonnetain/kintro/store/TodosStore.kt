@@ -45,7 +45,7 @@ class TodosStore : Store<TodosState, TodosAction, TodosSideEffect>,
     CoroutineScope by CoroutineScope(Dispatchers.Main),
         KoinComponent
 {
-private val logger: Kermit by inject()
+    private val logger : Kermit by inject()
     private val repository: TodosRepository by inject()
     private val state = MutableStateFlow(getInitialState())
     private val sideEffect = MutableSharedFlow<TodosSideEffect>()

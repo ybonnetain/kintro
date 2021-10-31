@@ -21,6 +21,7 @@ import dev.ybonnetain.kintro.android.R
 import dev.ybonnetain.kintro.android.styles.KintroTheme
 import dev.ybonnetain.kintro.android.styles.Scale
 import dev.ybonnetain.kintro.android.styles.typography
+import dev.ybonnetain.kintro.android.views.layout.TopBar
 
 import org.koin.androidx.compose.getViewModel
 
@@ -37,6 +38,8 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
             .background(MaterialTheme.colors.background)
             .wrapContentSize(Alignment.Center),
     ) {
+
+        TopBar("Compose + KMP")
 
         Text(
             text = "Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin",
