@@ -9781,7 +9781,7 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-shared@../build/compileSync/main/productionExecutable/kotlin:
+shared@../build/dist:
   version "0.0.0-unspecified"
 
 shebang-command@^1.2.0:

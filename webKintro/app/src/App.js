@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import { createContext, useContext, useEffect, useState } from 'react';
+import Shared from 'shared';
 import './App.css';
-import Shared from 'shared/kintro-webKintro'
+
+const SharedContext = createContext();
+const useSharedContext = () => useContext(SharedContext);
+
+function SharedProvider({ children }) {
+  const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared;
+
+  return (
+    <SharedContext.Provider value={{ shared }}>
+      {children}
+    </SharedContext.Provider>
+  )
+}
 
 function App() {
-  console.log(Shared.dev.ybonnetain.kintro.webkintro.coucou())
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <SharedProvider>
+      <div className="App">
+        <Counter />
+      </div>
+    </SharedProvider>
+  );
+}
+
+function Counter() {
+  const { shared } = useSharedContext();
+  const [count, setCount] = useState(null);
+
+  const increment = () => shared.incrementCounter();
+  const decrement = () => shared.decrementCounter();
+  const reset = () => shared.resetCounter();
+
+  useEffect(() => {
+    shared.observeCounter(setCount)
+  });
+
+  return (
+    <div className="Counter-container">
+      <span>{count}</span>
+      <div className="Counter-buttons-container">
+        <button onClick={increment}>increment</button>
+        <button onClick={decrement}>decrement</button>
+        <button onClick={reset}>reset</button>
+      </div>
     </div>
   );
 }

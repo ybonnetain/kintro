@@ -8,10 +8,16 @@ cd ../../
 # make a module for NPM
 # this assumes we use IR backend (see tasks bellow)
 
-mkdir ./build/dist
+mkdir ./webKintro/build/dist
 
-# copy package.json to executable folder
-# then copy module content to dist folder so NPM can install from there
+# copy module content to dist folder so NPM can install from there
+# then copy package.json to executable folder
 
-cp ./webKintro/build/tmp/publicPackageJson/package.json ./webKintro/build/compileSync/main/productionExecutable/kotlin/package.json
-cp -r ./webKintro/build/compileSync/main/productionExecutable/kotlin ./webKintro/build/dist/
+cp -r ./webKintro/build/compileSync/main/productionExecutable/kotlin/* ./webKintro/build/dist/
+cp ./webKintro/build/tmp/publicPackageJson/package.json ./webKintro/build/dist/package.json
+
+# rename all artifacts to index for shorter import
+
+mv ./webKintro/build/dist/kintro-webKintro.js ./webKintro/build/dist/index.js
+mv ./webKintro/build/dist/kintro-webKintro.js.map ./webKintro/build/dist/index.js.map
+mv ./webKintro/build/dist/kintro-webKintro.d.ts ./webKintro/build/dist/index.d.ts

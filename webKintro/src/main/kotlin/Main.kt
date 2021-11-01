@@ -13,16 +13,51 @@ import dev.ybonnetain.kintro.store.TodosAction
 import dev.ybonnetain.kintro.store.TodosStore
 
 // Using Kotlin code from JavaScript
+//
 // https://kotlinlang.org/docs/js-to-kotlin-interop.html#package-structure
 // https://kotlinlang.org/docs/js-overview.html#use-cases-for-kotlin-js
 // https://discuss.kotlinlang.org/t/consume-kotlin-multiplatform-library-in-vanilla-js-web-app/22152/2
 // https://kotlinlang.org/docs/js-modules.html#apply-jsmodule-to-packages
 // https://stackoverflow.com/questions/62372119/kotlin-javascript-bundle-for-usage-in-react-app
 
+// at the moment I reexport all stuffs here
+// I should look at exporting the shared MPP module directly
+
 @JsExport
-fun coucou() = "Hello"
+object Shared : KoinComponent {
 
+    private val mainScope = MainScope()
+    private val counter = Counter()
 
+    init {
+        initKoin()
+    }
+
+    @Suppress("unused")
+    fun incrementCounter() {
+        counter.incrementCounter()
+    }
+
+    @Suppress("unused")
+    fun decrementCounter() {
+        counter.decrementCounter()
+    }
+
+    @Suppress("unused")
+    fun resetCounter() {
+        counter.resetCounter()
+    }
+
+    @Suppress("unused")
+    fun observeCounter(callback: (count: Int) -> Unit) {
+        mainScope.launch {
+            counter.observeCounter().collect {
+                callback(it)
+            }
+        }
+    }
+
+}
 
 //object Shared : KoinComponent {
 

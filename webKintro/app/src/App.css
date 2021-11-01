@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.Counter-container {
+  flex-direction: column;
+  margin: 40px;
+}
+.Counter-container > span {
+  font-size: 50px;
+  font-weight: bold;
+}
+.Counter-buttons-container > button {
+  margin-top: 20px;
+  margin-left: 20px;
+}
