@@ -18,6 +18,24 @@ import androidx.compose.ui.unit.dp
 
 import dev.ybonnetain.kintro.android.styles.KintroTheme
 import dev.ybonnetain.kintro.android.styles.Scale
+import dev.ybonnetain.kintro.store.TodosAction
+import dev.ybonnetain.kintro.store.TodosFilter
+
+// ex: Usage with enum
+//
+//SegmentControls(
+//    items = enumValues<TodosFilter>().map { v -> v.name },
+//    currentIndex = TodosFilter.valueOf(state.value.filter.toString()).ordinal,
+//    callback = ::onFilterChange
+//)
+//
+//fun onFilterChange(index: Int) {
+//    when (index) {
+//        0 -> viewModel.store.dispatch(TodosAction.Filter(TodosFilter.TODO))
+//        1 -> viewModel.store.dispatch(TodosAction.Filter(TodosFilter.DONE))
+//        else -> {}
+//    }
+//}
 
 @Composable
 fun SegmentControls(
