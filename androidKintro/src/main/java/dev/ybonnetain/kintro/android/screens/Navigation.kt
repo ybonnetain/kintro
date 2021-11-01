@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 sealed class Screen(val title: String, val route: String) {
     object Counter : Screen("Counter", "counter")
     object Todos : Screen("Todos", "todos")
+    object TodoDetail: Screen("Todo", "todoDetail")
 }
 
 data class BottomNavItem(
@@ -40,7 +41,10 @@ fun Navigation(navController: NavHostController) {
             CounterScreen()
         }
         composable(Screen.Todos.route) {
-            TodosScreen()
+            TodosScreen(navController)
+        }
+        composable(Screen.TodoDetail.route) {
+            TodoDetailScreen(navController)
         }
     }
 }

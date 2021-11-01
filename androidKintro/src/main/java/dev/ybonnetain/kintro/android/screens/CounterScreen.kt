@@ -39,7 +39,7 @@ fun CounterScreen(viewModel: CounterViewModel = getViewModel()) {
             .wrapContentSize(Alignment.Center),
     ) {
 
-        TopBar("Compose + KMP")
+        TopBar("Counter")
 
         Text(
             text = "Here is the Fibonacci counter aimed at demonstrating algorythm sharing with Kotlin",
