@@ -12,17 +12,17 @@ brew install openjdk@11
 ```
 ## IDE
 
-* Android Studio *(2020.3.1)*
-* Xcode *(v13)*
+* Android Studio *(2020.3.1+)*
+* Xcode *(v13+)*
 
 ## Applications
 
-All dependant on the shared module
+All depends on the shared MPP module
 <br />Exec `./static/scripts/setenv.sh <prd|mock>` before running apps
 
 * Android -  `Compose` app
 * iOS - `SwiftUI` app
-* Web -  `HTMLElement` vanilla app (also React in Kotlin is possible)
+* Web -  `React` app in JS (webKintro/app)
 
 ## Resources
 

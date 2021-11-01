@@ -44,19 +44,10 @@ kotlin {
         xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 
-    // TODO: use IR backend ! when using it cannot import common classes in kjs source base
-    js {
+    js(IR) {
+        useCommonJs()
         browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "commonjs"
-            }
-        }
     }
-//    js(IR) {
-//        useCommonJs()
-//        browser()
-//    }
     
     sourceSets {
         val commonMain by getting {
