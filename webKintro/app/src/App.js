@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import Shared from 'shared';
-import './App.css';
+import { createContext, useContext, useEffect, useState } from 'react'
+import Shared from 'shared'
+import './App.css'
 
-const SharedContext = createContext();
-const useSharedContext = () => useContext(SharedContext);
+const SharedContext = createContext()
+const useSharedContext = () => useContext(SharedContext)
 
 function SharedProvider({ children }) {
-  const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared;
+  const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared
 
   return (
     <SharedContext.Provider value={{ shared }}>
@@ -20,22 +20,24 @@ function App() {
     <SharedProvider>
       <div className="App">
         <Counter />
+        <Todos />
       </div>
     </SharedProvider>
-  );
+  )
 }
 
 function Counter() {
-  const { shared } = useSharedContext();
-  const [count, setCount] = useState(null);
+  const { shared } = useSharedContext()
+  const [count, setCount] = useState(null)
 
-  const increment = () => shared.incrementCounter();
-  const decrement = () => shared.decrementCounter();
-  const reset = () => shared.resetCounter();
+  const increment = () => shared.incrementCounter()
+  const decrement = () => shared.decrementCounter()
+  const reset = () => shared.resetCounter()
 
   useEffect(() => {
     shared.observeCounter(setCount)
-  });
+    // TODO remove observer in the return function
+  }, []);
 
   return (
     <div className="Counter-container">
@@ -49,4 +51,38 @@ function Counter() {
   );
 }
 
-export default App;
+function Todos() {
+  const { shared } = useSharedContext()
+  const [loading, setLoading] = useState(false)
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    shared.loadTodos()
+    shared.observeStore(onStateChange)
+    // TODO remove observer in the return function
+  }, []);
+
+  const onStateChange = (state) => {
+    setLoading(state.loading)
+    // https://youtrack.jetbrains.com/issue/KT-28245
+    // toArray does not exist on EmptyList type which is the type yielded while our list is empty
+    // check that on futur Kotlin version
+    // also we could use array instead of list in TodoState
+    if (typeof state.todos.toArray !== 'undefined') {
+      setTodos(state.todos.toArray())
+    }
+  }
+
+  return (
+    <div className="Counter-container">
+      <span>Todos</span>
+      {loading && <p>loading</p>}
+      <ul className="Counter-buttons-container">
+        {todos.map(t => <li key={t.id}>{t.title}</li>)}
+      </ul>
+    </div>
+  )
+
+}
+
+export default App

@@ -13,7 +13,7 @@ interface ICounter {
     fun resetCounter()
 }
 
-class Counter() : KoinComponent, ICounter {
+class Counter : KoinComponent, ICounter {
 
     override fun observeCounter(): StateFlow<Int> = count
 
