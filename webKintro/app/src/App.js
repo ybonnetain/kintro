@@ -59,7 +59,7 @@ function Todos() {
   useEffect(() => {
     shared.loadTodos()
     shared.observeStore(onStateChange)
-    // TODO remove observer in the return function
+    return () => shared.cancel()
   }, []);
 
   const onStateChange = (state) => {

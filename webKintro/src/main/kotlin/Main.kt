@@ -44,6 +44,11 @@ object Shared {
     private val counter = Counter()
     private val store = TodosStore()
 
+    @Suppress("unused")
+    fun cancel() {
+        mainScope.cancel()
+    }
+
     // Counter
 
     @Suppress("unused")
@@ -78,7 +83,7 @@ object Shared {
     }
 
     @Suppress("unused")
-    fun observeStore(callback: (state: TodosState) -> Unit) { // TodosState
+    fun observeStore(callback: (state: TodosState) -> Unit) {
         mainScope.launch {
             store.observeState().collect {
                 callback(it)
