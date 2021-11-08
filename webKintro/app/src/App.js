@@ -36,7 +36,7 @@ function Counter() {
 
   useEffect(() => {
     shared.observeCounter(setCount)
-    // TODO remove observer in the return function
+    return () => shared.cancel()
   }, []);
 
   return (
