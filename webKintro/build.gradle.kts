@@ -23,17 +23,14 @@ dependencies {
         implementation(coroutinesCore)
     }
 }
-// TODO try IR backend
-//kotlin {
-//    js(IR) {
-//        browser()
-//        binaries.executable()
-//    }
-//}
 
 kotlin {
-    js {
-        useCommonJs()
-        browser()
+    js(IR) {
+        browser {
+            webpackTask {
+                output.libraryTarget = "commonjs2"
+            }
+        }
+        binaries.executable()
     }
 }

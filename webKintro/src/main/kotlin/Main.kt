@@ -1,38 +1,73 @@
+package dev.ybonnetain.kintro.webkintro
+
 import kotlinx.coroutines.flow.collect
-
 import kotlinx.coroutines.*
-import kotlin.js.Promise
-
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 
 import dev.ybonnetain.kintro.di.initKoin
 import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.store.TodosAction
+import dev.ybonnetain.kintro.store.TodosState
 import dev.ybonnetain.kintro.store.TodosStore
 
-// build: webKintro -> Tasks -> kotlin browser -> browserDistribution
+// Using Kotlin code from JavaScript :
+//
 
-// https://discuss.kotlinlang.org/t/kotlin-js-1-4-how-to-output-a-npm-package/19128
-// https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-export/
+// at the moment I reexport all needed declarations here
+// TODO I should look at exporting the shared MPP module directly
 
-// TODO look at better module export from kotlin code
-// https://kotlinlang.org/docs/js-modules.html#apply-jsmodule-to-packages
+// for information, declarations annotated w/ @JsExport gets
+// defined in the ts definition file and the names to be used are the original names
 
-// https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d
+// After exported as a cjs module we can use it like below ..
+// then have a look at the generated ts definition file for API usage
+//
+// import Shared from 'shared' <- I have also named the module Shared (see app's package json)
+// const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared <- top level export in this file
 
-// TODO webpack optimisations in dsl
+// how to "resolve" suspend fun in JS Promise ..
+// import kotlin.js.Promise
+// @DelicateCoroutinesApi
+//  fun _tickAsync() : Promise<String> = GlobalScope.promise {
+//    someSuspendEffect()
+//  }
 
-object Shared : KoinComponent {
-    val mainScope = MainScope()
+fun main() {
+    console.log("init koin context ...") // so internal injection in shared module is possible
+    initKoin()
+}
 
-    // counter api
-    //
+@ExperimentalJsExport
+@JsExport
+object Shared {
 
-    val counter = Counter()
-    val observeCounter = :: _observeCounter
+    private val mainScope = MainScope()
+    private val counter = Counter()
+    private val store = TodosStore()
 
-    fun _observeCounter(callback: (count: Int) -> Unit) {
+    @Suppress("unused")
+    fun cancel() {
+        mainScope.cancel()
+    }
+
+    // Counter
+
+    @Suppress("unused")
+    fun incrementCounter() {
+        counter.incrementCounter()
+    }
+
+    @Suppress("unused")
+    fun decrementCounter() {
+        counter.decrementCounter()
+    }
+
+    @Suppress("unused")
+    fun resetCounter() {
+        counter.resetCounter()
+    }
+
+    @Suppress("unused")
+    fun observeCounter(callback: (count: Int) -> Unit) {
         mainScope.launch {
             counter.observeCounter().collect {
                 callback(it)
@@ -40,63 +75,19 @@ object Shared : KoinComponent {
         }
     }
 
-    // store api
-    //
-    // all `todos` related functionalities in terms of state management, side effect
-    // note: is injected with koin in initializer
+    // Todos nano redux
 
-    val store : TodosStore
-
-    // -> sealed classed can only have private or protected constructor
-    // so we need to expose required actions here
-
-    val fetchTodos = TodosAction.Load
-
-    // make the dispatch & observe functions available to js
-    // this way I can avoid using @JsExport
-    // which complains about non-exportable super type and properties
-    // that being said @JsExport works just fine
-
-    val dispatch = :: _dispatch
-    val observe = :: _observe
-
-    fun _dispatch(action: TodosAction) {
-        store.dispatch(action)
+    @Suppress("unused")
+    fun loadTodos() {
+        store.dispatch(TodosAction.Load)
     }
-    fun _observe(callback: (state: Any) -> Unit) { // UsersState , Array<User>
+
+    @Suppress("unused")
+    fun observeStore(callback: (state: TodosState) -> Unit) {
         mainScope.launch {
             store.observeState().collect {
                 callback(it)
             }
         }
     }
-    //
-
-    // It is currently prohibited to export `extension properties` so fun is written here
-    // We would prefer to write a class extension to get the promise
-    // TODO: stay tuned for kotlin 1.6
-    private suspend fun tick() : String {
-        delay(5000)
-        return "tack"
-    }
-
-    @DelicateCoroutinesApi
-    val tickAsync = :: _tickAsync
-
-    @DelicateCoroutinesApi
-    fun _tickAsync() : Promise<String> = GlobalScope.promise {
-        tick()
-    }
-    //
-
-    init {
-        initKoin()
-        store = get()
-    }
-}
-
-fun main() {
-    // make the shared module available directly after main invocation
-    console.log("Shared main IIFE")
-    Shared
 }

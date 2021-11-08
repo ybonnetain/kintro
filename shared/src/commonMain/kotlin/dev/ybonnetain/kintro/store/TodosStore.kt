@@ -13,12 +13,14 @@ import org.koin.core.component.inject
 
 import dev.ybonnetain.kintro.models.Todo
 import dev.ybonnetain.kintro.repositories.TodosRepository
+import kotlin.js.JsExport
 
 enum class TodosFilter(val completed: Boolean) {
     TODO(false),
     DONE(true)
 }
 
+@JsExport
 data class TodosState(
     val todos: List<Todo>,
     val loading: Boolean,
