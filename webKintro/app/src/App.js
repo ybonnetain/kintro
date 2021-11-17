@@ -40,14 +40,17 @@ function Counter() {
   }, []);
 
   return (
-    <div className="Counter-container">
-      <span>{count}</span>
-      <div className="Counter-buttons-container">
-        <button onClick={increment}>increment</button>
-        <button onClick={decrement}>decrement</button>
-        <button onClick={reset}>reset</button>
+    <>
+      <h2 className="container-title">Counter</h2>
+      <div className="container">
+        <span>{count}</span>
+        <div className="Counter-buttons-container">
+          <button onClick={increment}>increment</button>
+          <button onClick={decrement}>decrement</button>
+          <button onClick={reset}>reset</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -74,13 +77,15 @@ function Todos() {
   }
 
   return (
-    <div className="Counter-container">
-      <span>Todos</span>
-      {loading && <p>loading</p>}
-      <ul className="Counter-buttons-container">
-        {todos.map(t => <li key={t.id}>{t.title}</li>)}
-      </ul>
-    </div>
+    <>
+      <h2 className="container-title">Todos</h2>
+      <div className="container">
+        {loading && <p>loading</p>}
+        <ul className="buttons-container">
+          {todos.map(t => <li key={t.id}>{t.title}</li>)}
+        </ul>
+      </div>
+    </>
   )
 
 }

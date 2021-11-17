@@ -20,9 +20,9 @@ brew install openjdk@11
 All depends on the shared MPP module
 <br />Exec `./static/scripts/setenv.sh <prd|mock>` before running apps
 
-* Android -  `Compose` app
-* iOS - `SwiftUI` app
-* Web -  `React` app in JS (webKintro/app)
+* Android -  Jetpack Compose
+* iOS - SwiftUI
+* Web -  React.js [webKintro/app](/webKintro/app/README.md)
 
 ## Resources
 

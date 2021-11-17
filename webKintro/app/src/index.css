@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(Inter-Regular.otf) format('otf')
+}
+@font-face {
+  font-family: 'Inter-Bold';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url(Inter-Bold.otf) format('otf')
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --ff-body: 'Inter', system-ui, sans-serif;
+  --ff-h2: 'Inter-Bold', system-ui, sans-serif;
+  --lh-body: 1.2;
+  --lh-h2: 1.4;
+  --fs-body: 20px;
+  --fs-h2: 30px;
+}
+
+body {
+  margin: 0;
+  padding: 40px;
+  font: var(--fs-body) / var(--lh-body) var(--ff-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f2f2f2;
+}
+
+h2 {
+  font: var(--fs-h2) / var(--lh-h2) var(--ff-h2);
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul > li {
+  margin-top: 12px;
+}
+
+button {
+  background-color: #FF2D55;
+  padding: 8px;
+  border: 0px;
+  margin: 12px;
+  height: 50px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 20px;
 }

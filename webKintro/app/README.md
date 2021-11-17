@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Kintro/webKintro/app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+NPM postinstall scripts run the MPP module gradle build.
 
 ## Available Scripts
 
