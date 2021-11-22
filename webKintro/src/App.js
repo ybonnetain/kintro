@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import Shared from 'shared'
+import Shared from 'kintro-shared'
 import './App.css'
 
 const SharedContext = createContext()
 const useSharedContext = () => useContext(SharedContext)
 
 function SharedProvider({ children }) {
-  const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared
+  const shared = Shared.dev.ybonnetain.kintro.Main
 
   return (
     <SharedContext.Provider value={{ shared }}>

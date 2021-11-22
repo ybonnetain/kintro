@@ -1,44 +1,23 @@
-package dev.ybonnetain.kintro.webkintro
-
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.*
+package dev.ybonnetain.kintro
 
 import dev.ybonnetain.kintro.di.initKoin
 import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.store.TodosAction
 import dev.ybonnetain.kintro.store.TodosState
 import dev.ybonnetain.kintro.store.TodosStore
-
-// Using Kotlin code from JavaScript :
-//
-
-// at the moment I reexport all needed declarations here
-// TODO I should look at exporting the shared MPP module directly
-
-// for information, declarations annotated w/ @JsExport gets
-// defined in the ts definition file and the names to be used are the original names
-
-// After exported as a cjs module we can use it like below ..
-// then have a look at the generated ts definition file for API usage
-//
-// import Shared from 'shared' <- I have also named the module Shared (see app's package json)
-// const shared = Shared.dev.ybonnetain.kintro.webkintro.Shared <- top level export in this file
-
-// how to "resolve" suspend fun in JS Promise ..
-// import kotlin.js.Promise
-// @DelicateCoroutinesApi
-//  fun _tickAsync() : Promise<String> = GlobalScope.promise {
-//    someSuspendEffect()
-//  }
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 fun main() {
-    console.log("init koin context ...") // so internal injection in shared module is possible
+    console.log("init Koin context")
     initKoin()
 }
 
 @ExperimentalJsExport
 @JsExport
-object Shared {
+object Main {
 
     private val mainScope = MainScope()
     private val counter = Counter()
