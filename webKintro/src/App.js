@@ -37,7 +37,7 @@ function Counter() {
   useEffect(() => {
     shared.observeCounter(setCount)
     return () => shared.cancel()
-  }, []);
+  }, [shared]);
 
   return (
     <>
@@ -63,17 +63,11 @@ function Todos() {
     shared.loadTodos()
     shared.observeStore(onStateChange)
     return () => shared.cancel()
-  }, []);
+  }, [shared]);
 
   const onStateChange = (state) => {
     setLoading(state.loading)
-    // https://youtrack.jetbrains.com/issue/KT-28245
-    // toArray does not exist on EmptyList type which is the type yielded while our list is empty
-    // check that on futur Kotlin version
-    // also we could use array instead of list in TodoState
-    if (typeof state.todos.toArray !== 'undefined') {
-      setTodos(state.todos.toArray())
-    }
+    setTodos(state.todos)
   }
 
   return (

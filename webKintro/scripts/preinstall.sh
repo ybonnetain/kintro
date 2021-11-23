@@ -2,6 +2,7 @@ echo 'NPM preinstall hook'
 pwd
 
 cd ../
+# ./gradlew shared:clean
 ./gradlew shared:compileProductionExecutableKotlinJs
 ./gradlew shared:jsPublicPackageJson
 

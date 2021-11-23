@@ -20,7 +20,6 @@ enum class TodosFilter(val completed: Boolean) {
     DONE(true)
 }
 
-@JsExport
 data class TodosState(
     val todos: List<Todo>,
     val loading: Boolean,

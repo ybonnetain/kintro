@@ -1,8 +1,10 @@
 package dev.ybonnetain.kintro
 
 import dev.ybonnetain.kintro.di.initKoin
+import dev.ybonnetain.kintro.models.Todo
 import dev.ybonnetain.kintro.repositories.Counter
 import dev.ybonnetain.kintro.store.TodosAction
+import dev.ybonnetain.kintro.store.TodosFilter
 import dev.ybonnetain.kintro.store.TodosState
 import dev.ybonnetain.kintro.store.TodosStore
 import kotlinx.coroutines.MainScope
@@ -14,6 +16,20 @@ fun main() {
     console.log("init Koin context")
     initKoin()
 }
+
+@ExperimentalJsExport
+@JsExport
+class TodosStateJsWrapper(
+    val loading : Boolean,
+    val todos : Array<Todo>,
+    val filter: TodosFilter,
+)
+
+fun TodosState.toJsObject() = TodosStateJsWrapper(
+    loading,
+    todos.toTypedArray(),
+    filter
+)
 
 @ExperimentalJsExport
 @JsExport
@@ -62,10 +78,10 @@ object Main {
     }
 
     @Suppress("unused")
-    fun observeStore(callback: (state: TodosState) -> Unit) {
+    fun observeStore(callback: (state: TodosStateJsWrapper) -> Unit) {
         mainScope.launch {
             store.observeState().collect {
-                callback(it)
+                callback(it.toJsObject())
             }
         }
     }
