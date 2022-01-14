@@ -1,6 +1,7 @@
 # Kintro
 
-This project is intended at giving a first introduction to `kotlin multiplatform` to a development / product team
+This project is intended at giving a first introduction to `kotlin multiplatform` to a development / product team \
+Here is the [introduction](/static/INTRODUCTION.md) for the team members
 
 ## Prerequisites
 
@@ -17,12 +18,13 @@ brew install openjdk@11
 
 ## Applications
 
-All depends on the shared MPP module
-<br />Exec `./static/scripts/setenv.sh <prd|mock>` before running apps
-
 * Android -  Jetpack Compose
 * iOS - SwiftUI
 * Web -  React.js [webKintro/app](/webKintro/app/README.md)
+
+## Configuration
+
+`./static/scripts/setenv.sh <prd|mock>`
 
 ## Resources
 
