@@ -103,8 +103,7 @@ sealed class TodosAction : Action {
 
 ## Android integration with Jetpack Compose
 
-<img src="/static/images/kintro-counter-android.png" alt="counter" width="250" />
-<img src="/static/images/kintro-todos-android.png" alt="todos" width="250" />
+<img src="/static/images/kintro-counter-android.png" alt="counter" width="250" /> <img src="/static/images/kintro-todos-android.png" alt="todos" width="250" />
 
 I have choosen to keep using Android ViewModel singled by Koin, the injection framework which is also used in the MPP module.
 
@@ -159,8 +158,7 @@ if (state.value.loading) {
 
 ## iOS integration with SwiftUI
 
-<img src="/static/images/kintro-counter-ios.png" alt="counter" width="250" />
-<img src="/static/images/kintro-todos-ios.png" alt="todos" width="250" />
+<img src="/static/images/kintro-counter-ios.png" alt="counter" width="250" /> <img src="/static/images/kintro-todos-ios.png" alt="todos" width="250" />
 
 With SwiftUI we can leverage ObservableObject and the @Published property wrapper to react to state changes. \
 Also note that more advanced designs are possible, notably usage with Swift 5.5 async/await and RxSwift. \
