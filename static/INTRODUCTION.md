@@ -3,6 +3,12 @@
 Kintro is intended at giving a first introduction to kotlin multiplatform to a development / product team. \
 It is a minimal project visiting the counter and the todo list, the most common tutorials of front-end development.
 
+## Table of Contents
+* [Multiplatform programming module](#multiplatform-programming-module)
+* [Android integration with Jetpack Compose](#android-integration-with-jetpack-compose)
+* [iOS integration with SwiftUI](#ios-integration-with-swiftui)
+* [Web integration with React.js](#web-integration-with-reactjs)
+
 ## Multiplatform programming module
 
 After analyzing a requirement you must determine what part of a feature you can share in term of code and what you cannot. \
@@ -41,11 +47,7 @@ data class Todo(
     var title: String,
     var completed: Boolean
 )
-{
-    fun toggleCompleted() {
-        completed = !completed
- }
- ```
+```
 
 The REST client implementation is very simple thanks to Ktor. (v1 here)
 
@@ -106,7 +108,7 @@ sealed class TodosAction : Action {
 <img src="/static/images/kintro-counter-android.png" alt="counter" width="250" /> <img src="/static/images/kintro-todos-android.png" alt="todos" width="250" />
 
 I have choosen to keep using Android ViewModel singled by Koin, the injection framework which is also used in the MPP module.
-
+<meta charset="UTF-8" />
 ```kotlin
 val appModule = module {
     viewModel { TodosViewModel(get()) }
