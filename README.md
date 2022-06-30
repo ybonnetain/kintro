@@ -1,7 +1,6 @@
 # Kintro
 
-This project is intended at giving a first introduction to `kotlin multiplatform` to a development / product team \
-Here is the [introduction](/static/INTRODUCTION.md) for the team members
+This project is intended at giving a first introduction to `kotlin multiplatform` to a development / product team.
 
 ## Prerequisites
 
